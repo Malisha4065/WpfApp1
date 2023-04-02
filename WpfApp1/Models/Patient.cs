@@ -14,11 +14,13 @@ namespace WpfApp1.Models
         [Required]
         public string PatientName { get; set;}
         [Required]
+        public string Gender { get; set; }
+        [Required]
         public string City { get; set;}
         [Required]
         public string Disease { get; set;}
         [Required]
-        public virtual Doctor Doctor { get; set;}
+        public virtual DoctorC Doctor { get; set;}
         [Required]
         public string Date { get; set;}
         [Required]

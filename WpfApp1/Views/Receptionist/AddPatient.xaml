@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views.Receptionist"
+             xmlns:viewModelReceptionist="clr-namespace:WpfApp1.ViewModels.Receptionist"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="610"
              Background="Transparent">
+    <UserControl.DataContext>
+        <viewModelReceptionist:AddPatientVM/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="10"/>
@@ -25,20 +29,20 @@
     <Grid>
         <StackPanel Margin="105 30 105 30">
             <Label Content="Patient Name:"/>
-            <TextBox Name="PatientNameTxtBox"/>
+            <TextBox Name="PatientNameTxtBox" Text="{Binding PatientName, Mode=OneWayToSource}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Gender: "/>
                 <Label Content="Patient ID: " Margin="165 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Width="180" Name="GenderBox" FontSize="10">
+                <ComboBox Width="180" Name="GenderBox" FontSize="10"  DisplayMemberPath="{Binding }" >
                     <ComboBoxItem Tag="Male" Content="Male" IsSelected="True"/>
                     <ComboBoxItem Tag="Female" Content="Female"/>
                 </ComboBox>
-                <TextBox Name="PatientIDTxtBox" Width="190" Margin="30 0 0 0"/>
+                <TextBox Name="PatientIDTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding PatientId, Mode=OneWayToSource}"/>
             </StackPanel>
             <Label Content="Disease: "/>
-            <TextBox Name="DiseaseTxtBox" Width="400"/>
+            <TextBox Name="DiseaseTxtBox" Width="400" Text="{Binding Disease, Mode=OneWayToSource}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Doctor: "/>
                 <Label Content="Payment(Rupees): " Margin="166 0 0 0"/>
@@ -47,15 +51,15 @@
                 <ComboBox Name="DoctorBox" Width="180" FontSize="10">
                     <ComboBoxItem/>
                 </ComboBox>
-                <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0"/>
+                <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Payment, Mode=OneWayToSource}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="City: "/>
                 <Label Content="Phone Number: " Margin="180 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBox Name="CityTxtBox" Width="180"/>
-                <TextBox Name="PhoneNoBox" Width="190" Margin="30 0 0 0"/>
+                <TextBox Name="CityTxtBox" Width="180" Text="{Binding City, Mode=OneWayToSource}"/>
+                <TextBox Name="PhoneNoBox" Width="190" Margin="30 0 0 0" Text="{Binding PhoneNumber, Mode=OneWayToSource}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Appointment Date: "/>
@@ -63,9 +67,9 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True"/>
-                <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0"/>
+                <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time, Mode=OneWayToSource}"/>
             </StackPanel>
-            <Button Name="PatientSubmitButton" Margin="0 10 0 0">
+            <Button Name="PatientSubmitButton" Margin="0 10 0 0" Command="{Binding InsertPatientCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid>

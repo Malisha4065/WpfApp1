@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Models
 {
-    public class Doctor
+    public class DoctorC
     {
         [Key]
         public int DoctorID { get; set; }

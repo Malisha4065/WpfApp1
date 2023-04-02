@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Receptionist
 {
@@ -20,7 +21,7 @@ namespace WpfApp1.ViewModels.Receptionist
 				OnPropertyChanged();
 			}
 		}
-
+        
         [RelayCommand]
         public void AddPatientForm ()
         {
