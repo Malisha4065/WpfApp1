@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WpfApp1.Models
+{
+    public class Patient
+    {
+        [Key] 
+        public int PatientId { get; set; }
+        [Required]
+        public string PatientName { get; set;}
+        [Required]
+        public string City { get; set;}
+        [Required]
+        public string Disease { get; set;}
+        [Required]
+        public virtual Doctor Doctor { get; set;}
+        [Required]
+        public string Date { get; set;}
+        [Required]
+        public string Time { get; set;}
+        [Required]
+        public string Payment { get; set;}
+        [Required]
+        public string PhoneNumber { get; set;}
+        
+    }
+}
