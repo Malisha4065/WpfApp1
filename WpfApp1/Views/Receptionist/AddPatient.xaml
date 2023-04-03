@@ -35,7 +35,7 @@
                 <Label Content="Patient ID: " Margin="165 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Width="180" Name="GenderBox" FontSize="10"  DisplayMemberPath="{Binding }" >
+                <ComboBox Width="180" Name="GenderBox" FontSize="10" SelectedValue="{Binding Gender}" SelectedValuePath="Tag">
                     <ComboBoxItem Tag="Male" Content="Male" IsSelected="True"/>
                     <ComboBoxItem Tag="Female" Content="Female"/>
                 </ComboBox>
@@ -48,8 +48,12 @@
                 <Label Content="Payment(Rupees): " Margin="166 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Name="DoctorBox" Width="180" FontSize="10">
-                    <ComboBoxItem/>
+                <ComboBox Name="DoctorBox" Width="180" FontSize="10" ItemsSource="{Binding Doctors}"  SelectedItem="{Binding Doctor}" SelectedValuePath="DoctorID">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Payment, Mode=OneWayToSource}"/>
             </StackPanel>
@@ -66,7 +70,7 @@
                 <Label Content="Appointment Time: " Margin="116 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True"/>
+                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, Mode=OneWayToSource}"/>
                 <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time, Mode=OneWayToSource}"/>
             </StackPanel>
             <Button Name="PatientSubmitButton" Margin="0 10 0 0" Command="{Binding InsertPatientCommand}">
