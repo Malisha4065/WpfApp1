@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views.Receptionist"
              xmlns:viewModelReceptionist="clr-namespace:WpfApp1.ViewModels.Receptionist"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="610"
              Background="Transparent">
@@ -27,7 +28,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Margin="105 30 105 30">
+        <StackPanel Margin="105 0 105 30">
             <Label Content="Patient Name:"/>
             <TextBox Name="PatientNameTxtBox" Text="{Binding PatientName, Mode=OneWayToSource}"/>
             <StackPanel Orientation="Horizontal">
@@ -70,7 +71,11 @@
                 <Label Content="Appointment Time: " Margin="116 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, Mode=OneWayToSource}"/>
+                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, Mode=OneWayToSource, FallbackValue={x:Static sys:DateTime.Now}}">
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="01/01/0001" End="{x:Static viewModelReceptionist:AddPatientVM.Yesterday}"/>
+                    </DatePicker.BlackoutDates>
+                </DatePicker>
                 <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time, Mode=OneWayToSource}"/>
             </StackPanel>
             <Button Name="PatientSubmitButton" Margin="0 10 0 0" Command="{Binding InsertPatientCommand}">

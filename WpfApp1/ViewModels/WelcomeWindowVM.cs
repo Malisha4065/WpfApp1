@@ -9,6 +9,6 @@ namespace WpfApp1.ViewModels
 {
     public class WelcomeWindowVM : ObservableObject
     {
-
+        
     }
 }

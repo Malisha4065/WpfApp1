@@ -27,15 +27,19 @@ namespace WpfApp1
 
         public MainWindow()
         {
-            DataContext = new MainWindowVM();
             InitializeComponent();
-            
-            /*using(Repository repo = new Repository())
+            MainWindowVM vm = new MainWindowVM();
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => this.Close());
+
+            /*using (Repository repo = new Repository())
             {
                 User user = new User()
                 {
-                    UserName = "seether",
-                    Password = "123"
+                    UserName = "Admin",
+                    Password = "45678",
+                    Occupation = "Admin"
                 };
                 repo.Users.Add(user);
                 repo.SaveChanges();
@@ -51,6 +55,13 @@ namespace WpfApp1
                 {
                     userNameTextBox.Text = "not found";
                 };
+            }*/
+
+            /*using (Repository repo = new Repository())
+            {
+                repo.Users.Find("seether").Occupation = "Receptionist";
+                repo.Users.Find("Django").Occupation = "Doctor";
+                repo.SaveChanges();
             }*/
         }
 

@@ -9,7 +9,7 @@ namespace WpfApp1.Models
 {
     public class Patient
     {
-        [Key] 
+        [Key] // !!!!!!!!!!!!!!!can i make this database generated?!!!!!!!!!!!!!!!!!
         public int PatientId { get; set; }
         [Required]
         public string PatientName { get; set;}

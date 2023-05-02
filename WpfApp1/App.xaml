@@ -4,15 +4,30 @@
              xmlns:local="clr-namespace:WpfApp1"
              xmlns:viewModelReceptionist="clr-namespace:WpfApp1.ViewModels.Receptionist"
              xmlns:viewReceptionist="clr-namespace:WpfApp1.Views.Receptionist"
-             StartupUri="Views/Receptionist/ReceptionistWindow.xaml">
+             xmlns:viewAdmin="clr-namespace:WpfApp1.Views.Admin"
+             xmlns:viewModelAdmin="clr-namespace:WpfApp1.ViewModels.Admin"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/SideBarButtons.xaml"/>
+                <ResourceDictionary Source="/Themes/ScrollBars.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+            
             <DataTemplate DataType="{x:Type viewModelReceptionist:AddPatientVM}">
                 <viewReceptionist:AddPatient/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelReceptionist:ViewAllPatientsVM}">
+                <viewReceptionist:ViewAllPatients/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelAdmin:AddUserVM}">
+                <viewAdmin:AddUser/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelAdmin:ViewUsersVM}">
+                <viewAdmin:ViewUsers/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -12,6 +12,7 @@ namespace WpfApp1.ViewModels.Receptionist
     public partial class ReceptionistWindowVM : ObservableObject
     {
         public AddPatientVM addPatientVM { get; set; }
+        public ViewAllPatientsVM viewAllPatientsVM { get; set; }
         private object _currentView;
 
 		public object CurrentView
@@ -27,6 +28,13 @@ namespace WpfApp1.ViewModels.Receptionist
         {
             addPatientVM = new AddPatientVM();
             CurrentView = addPatientVM;
+        }
+
+        [RelayCommand]
+        public void ViewAllPatientsForm()
+        {
+            viewAllPatientsVM = new ViewAllPatientsVM();
+            CurrentView = viewAllPatientsVM;
         }
 
         public ReceptionistWindowVM()

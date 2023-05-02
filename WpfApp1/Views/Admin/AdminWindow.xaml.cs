@@ -11,20 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApp1.ViewModels.Receptionist;
+using WpfApp1.ViewModels.Admin;
 
-namespace WpfApp1.Views.Receptionist
+namespace WpfApp1.Views.Admin
 {
     /// <summary>
-    /// Interaction logic for ReceptionistWindow.xaml
+    /// Interaction logic for AdminWindow.xaml
     /// </summary>
-    public partial class ReceptionistWindow : Window
+    public partial class AdminWindow : Window
     {
-        public ReceptionistWindow()
+        public AdminWindow()
         {
-            DataContext = new ReceptionistWindowVM();
+            DataContext = new AdminWindowVM();
             InitializeComponent();
+
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -32,6 +34,7 @@ namespace WpfApp1.Views.Receptionist
                 DragMove();
             }
         }
+
         private void Minimize_Clicked(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;

@@ -76,5 +76,10 @@ namespace WpfApp1.ViewModels.Receptionist
         {
             DoctorList();    
         }
+
+        public static DateTime Yesterday
+        {
+            get { return DateTime.Now.AddDays(-1); }
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace WpfApp1.Models
 {
@@ -18,5 +19,8 @@ namespace WpfApp1.Models
         [MinLength(5)]
         [MaxLength(50)]
         public string Password { get; set; }
+
+        [Required]
+        public string Occupation { get; set; }
     }
 }
