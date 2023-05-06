@@ -80,6 +80,8 @@
                 <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Add User" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddUserFormCommand}"/>
                 <RadioButton Content="View Users" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllUsersCommand}"/>
+                <RadioButton Content="Add Doctor" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddDoctorFormCommand}"/>
+                <RadioButton Content="View Doctors" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllDoctorsCommand}"/>
                 <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
             </StackPanel>

@@ -26,5 +26,6 @@ namespace WpfApp1.Database
             modelBuilder.Entity<DoctorC>().ToTable("DoctorTable");
             modelBuilder.Entity<Patient>().ToTable("PatientTable");
         }
+
     }
 }

@@ -12,6 +12,9 @@ namespace WpfApp1.ViewModels.Admin
     {
         public AddUserVM addUserVM { get; set; }
         public ViewUsersVM viewUsersVM { get; set; }
+        public AddDoctorVM addDoctorVM { get; set; }
+        public ViewDoctorsVM viewDoctorsVM { get; set; }
+
         private object _currentView;
 
         public object CurrentView { 
@@ -30,6 +33,20 @@ namespace WpfApp1.ViewModels.Admin
         {
             viewUsersVM = new ViewUsersVM();
             CurrentView = viewUsersVM;
+        }
+
+        [RelayCommand]
+        public void AddDoctorForm()
+        {
+            addDoctorVM = new AddDoctorVM();
+            CurrentView = addDoctorVM;
+        }
+
+        [RelayCommand]
+        public void ViewAllDoctors()
+        {
+            viewDoctorsVM = new ViewDoctorsVM();
+            CurrentView = viewDoctorsVM;
         }
     }
 }

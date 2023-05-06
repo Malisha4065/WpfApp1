@@ -29,6 +29,14 @@
             <DataTemplate DataType="{x:Type viewModelAdmin:ViewUsersVM}">
                 <viewAdmin:ViewUsers/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelAdmin:AddDoctorVM}">
+                <viewAdmin:AddDoctor/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelAdmin:ViewDoctorsVM}">
+                <viewAdmin:ViewDoctors/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

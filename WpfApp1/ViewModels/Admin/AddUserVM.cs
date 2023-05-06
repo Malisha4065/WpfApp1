@@ -35,13 +35,7 @@ namespace WpfApp1.ViewModels.Admin
                     repo.Users.Add(user);
                     repo.SaveChanges();
 
-                    if (Occupation == "Doctor")
-                    {
-                        DoctorC doctor = new DoctorC();
-                        doctor.Name = UserName;
-                        repo.Doctors.Add(doctor);
-                        repo.SaveChanges ();
-                    }
+                   
 
                 }
 
