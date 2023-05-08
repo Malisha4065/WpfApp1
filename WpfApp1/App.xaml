@@ -6,6 +6,8 @@
              xmlns:viewReceptionist="clr-namespace:WpfApp1.Views.Receptionist"
              xmlns:viewAdmin="clr-namespace:WpfApp1.Views.Admin"
              xmlns:viewModelAdmin="clr-namespace:WpfApp1.ViewModels.Admin"
+             xmlns:viewDoctor="clr-namespace:WpfApp1.Views.Doctor"
+             xmlns:viewModelDoctor="clr-namespace:WpfApp1.ViewModels.Doctor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -36,6 +38,10 @@
 
             <DataTemplate DataType="{x:Type viewModelAdmin:ViewDoctorsVM}">
                 <viewAdmin:ViewDoctors/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelDoctor:ViewPatientsVM}">
+                <viewDoctor:ViewPatients/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -11,18 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApp1.ViewModels;
+using WpfApp1.ViewModels.Doctor;
 
-namespace WpfApp1.Views
+namespace WpfApp1.Views.Doctor
 {
     /// <summary>
-    /// Interaction logic for WelcomeWindow.xaml
+    /// Interaction logic for DoctorWindow.xaml
     /// </summary>
-    public partial class WelcomeWindow : Window
+    public partial class DoctorWindow : Window
     {
-        public WelcomeWindow()
+        public DoctorWindow()
         {
-            DataContext = new WelcomeWindowVM();
+            DataContext = new DoctorWindowVM();
             InitializeComponent();
         }
 

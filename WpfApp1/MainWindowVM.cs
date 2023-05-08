@@ -11,13 +11,17 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using WpfApp1.Database;
+using WpfApp1.Messenger;
 using WpfApp1.Models;
 using WpfApp1.Views;
 using WpfApp1.Views.Admin;
+using WpfApp1.Views.Doctor;
 using WpfApp1.Views.Receptionist;
 
 namespace WpfApp1
@@ -86,10 +90,14 @@ namespace WpfApp1
                 if (isPasswordCorrect())
                 {
                     MessageBox.Show("Permission Granted");
-                    using (Repository repo = new Repository())
+                    using (Repository repo = new Repository())          // This should be removed after!!!!!!!!
                     {
                         if (Users[userIndex].Occupation == "Doctor")
+                        {
                             windowFactory.CreateNewDoctorWindow();
+                            List<DoctorC> doctorCs = repo.Doctors.Include("Patients").ToList();
+                            WeakReferenceMessenger.Default.Send(new MessengerCfirst(doctorCs[0]));
+                        }
                         else if (Users[userIndex].Occupation == "Receptionist")
                             windowFactory.CreateNewReceptionistWindow();
                         else if (Users[userIndex].Occupation == "Admin")
@@ -122,8 +130,8 @@ namespace WpfApp1
     {
         public void CreateNewDoctorWindow()
         {
-            WelcomeWindow welcomeWindow = new WelcomeWindow();
-            welcomeWindow.Show();
+            DoctorWindow doctorWindow = new DoctorWindow();
+            doctorWindow.Show();
         }
 
         public void CreateNewReceptionistWindow()

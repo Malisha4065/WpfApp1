@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using WpfApp1.Database;
 using WpfApp1.Models;
 
@@ -19,7 +20,7 @@ namespace WpfApp1.ViewModels.Admin
         {
             using (var db = new Repository())
             {
-                doctors = new ObservableCollection<DoctorC>(db.Doctors.OrderBy(d => d.DoctorID).ToList());
+                doctors = new ObservableCollection<DoctorC>(db.Doctors.OrderBy(d => d.DoctorID).ToList()); 
             }
         }
     }

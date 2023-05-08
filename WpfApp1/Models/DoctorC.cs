@@ -16,6 +16,7 @@ namespace WpfApp1.Models
         public string Name { get; set; }
         [Required]
         public string Specialization { get; set; }
+        
         public virtual ICollection<Patient> Patients { get; set; }
     }
 }
