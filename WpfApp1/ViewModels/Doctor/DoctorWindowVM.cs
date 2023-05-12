@@ -14,6 +14,7 @@ namespace WpfApp1.ViewModels.Doctor
     public partial class DoctorWindowVM : ObservableObject, IRecipient<MessengerCfirst>
     {
         public ViewPatientsVM viewPatientsVM { get; set; }
+        public OverviewVM overviewVM { get; set; }
 
         private object _currentView;
 
@@ -33,6 +34,29 @@ namespace WpfApp1.ViewModels.Doctor
         }
 
         [RelayCommand]
+        public async void ViewOverview()
+        {
+            Task userControlTask = userControlOverview();
+
+            Task messageTask = sendMessageOverview();
+
+            await userControlTask;
+            await messageTask;
+        }
+        private async Task userControlOverview()
+        {
+            await Task.Delay(100);
+            overviewVM = new OverviewVM();
+            CurrentView = overviewVM;
+        }
+        private async Task sendMessageOverview()
+        {
+            await Task.Delay(150);
+            WeakReferenceMessenger.Default.Send(new MessengerOverviewDoc(Doctor));
+        }
+
+
+        [RelayCommand]
         public async void ViewAllPatients()
         {
             Task userControlTask = userControlF();
@@ -41,6 +65,7 @@ namespace WpfApp1.ViewModels.Doctor
 
             await userControlTask;
             await messageTask;
+
         }
         private async Task userControlF()
         {
@@ -58,6 +83,7 @@ namespace WpfApp1.ViewModels.Doctor
         public void Receive(MessengerCfirst message)
         {
             Doctor = message.Value;
+            ViewOverview();
         }
     }
 }

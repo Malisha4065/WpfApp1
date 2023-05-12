@@ -90,19 +90,21 @@ namespace WpfApp1
                 if (isPasswordCorrect())
                 {
                     MessageBox.Show("Permission Granted");
-                    using (Repository repo = new Repository())          // This should be removed after!!!!!!!!
-                    {
+                    
                         if (Users[userIndex].Occupation == "Doctor")
                         {
                             windowFactory.CreateNewDoctorWindow();
-                            List<DoctorC> doctorCs = repo.Doctors.Include("Patients").ToList();
-                            WeakReferenceMessenger.Default.Send(new MessengerCfirst(doctorCs[0]));
-                        }
-                        else if (Users[userIndex].Occupation == "Receptionist")
+                            using (Repository repo = new Repository())
+                            {
+                                List<DoctorC> doctorCs = repo.Doctors.Include("Patients").ToList();
+                                WeakReferenceMessenger.Default.Send(new MessengerCfirst(doctorCs[0]));
+                            }
+                    }
+                    else if (Users[userIndex].Occupation == "Receptionist")
                             windowFactory.CreateNewReceptionistWindow();
                         else if (Users[userIndex].Occupation == "Admin")
                             windowFactory.CreateNewAdminWindow();
-                    }
+                    
                     CloseAction();
                 }
                 else
@@ -115,8 +117,6 @@ namespace WpfApp1
                 MessageBox.Show("Wrong Username");
             }
         }
-
-
     }
 
     public interface WindowFactory

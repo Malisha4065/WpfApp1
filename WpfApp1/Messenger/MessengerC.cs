@@ -17,4 +17,9 @@ namespace WpfApp1.Messenger
     {
         public MessengerCfirst(DoctorC value) : base(value) { }
     }
+
+    public class MessengerOverviewDoc : ValueChangedMessage<DoctorC>
+    {
+        public MessengerOverviewDoc(DoctorC value) : base(value) { }
+    }
 }

@@ -77,7 +77,8 @@
                 <Button Grid.Column="2" Content="x" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="5 0 0 0" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
+                <RadioButton Content="Overview" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}" Command="{Binding ViewOverviewCommand}"/>
+                <RadioButton Content="Appointments" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="View Patients" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllPatientsCommand}"/>
                 <RadioButton Content="Edit Patient" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Add a Report" FontSize="22" Style="{StaticResource SideBar}"/>
