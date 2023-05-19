@@ -37,7 +37,7 @@
                   CanUserAddRows="False" CanUserDeleteRows="False"
                   CanUserResizeRows="False" HeadersVisibility="Column" CanUserResizeColumns="True" 
                   CanUserReorderColumns="False" BorderBrush="Transparent"
-                  SelectionMode="Single" AutoGenerateColumns="False">
+                  SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedUser}">
             <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#880E4F"/>
@@ -94,22 +94,23 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Username    : "/>
-                        <TextBox/>
+                        <TextBox Text="{Binding ModifiedUser.UserName}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Password     : "/>
-                        <TextBox/>
+                        <TextBox Text="{Binding ModifiedUser.Password}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Occupation  : "/>
-                        <ComboBox Width="200" Height="20" FontSize="12">
+                        <ComboBox Width="200" Height="20" FontSize="12" SelectedValue="{Binding ModifiedUser.Occupation}" 
+                                SelectedValuePath="Content">
                             <ComboBoxItem Content="Admin"/>
                             <ComboBoxItem Content="Doctor"/>
                             <ComboBoxItem Content="Receptionist"/>
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>
-                <Button Name="UpdateButton" Margin="90 0 0 0" Command="{Binding SubmitNewUserCommand}">
+                <Button Name="UpdateButton" Margin="90 0 0 0" Command="{Binding UpdateUserCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid>
