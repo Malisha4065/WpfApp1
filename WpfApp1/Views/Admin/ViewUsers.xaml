@@ -94,15 +94,15 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Username    : "/>
-                        <TextBox Text="{Binding ModifiedUser.UserName}"/>
+                        <TextBox Text="{Binding SelectedUser.UserName}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Password     : "/>
-                        <TextBox Text="{Binding ModifiedUser.Password}"/>
+                        <TextBox Text="{Binding SelectedUser.Password}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Occupation  : "/>
-                        <ComboBox Width="200" Height="20" FontSize="12" SelectedValue="{Binding ModifiedUser.Occupation}" 
+                        <ComboBox Width="200" Height="20" FontSize="12" SelectedValue="{Binding SelectedUser.Occupation}" 
                                 SelectedValuePath="Content">
                             <ComboBoxItem Content="Admin"/>
                             <ComboBoxItem Content="Doctor"/>

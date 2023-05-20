@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -23,26 +24,25 @@ namespace WpfApp1.ViewModels.Admin
 
         public User SelectedUser
         {
-            get { return selectedUser; }
-            set { 
-                if (value != null)
-                    selectedUser = value;
-                modifiedUser.UserName = selectedUser.UserName;
-                modifiedUser.Password = selectedUser.Password;
-                modifiedUser.Occupation = selectedUser.Occupation;
-                OnPropertyChanged(nameof(ModifiedUser));
-            }
-        }
-
-
-        private User modifiedUser;
-        public User ModifiedUser { 
             get {
-                return modifiedUser;
-            } 
-            set
-            {
-                modifiedUser = value;
+                return selectedUser;
+            }
+            set {
+                User user = value;
+                if (selectedUser == null)
+                    selectedUser = new User();
+                if (user != null)
+                {
+                    selectedUser.UserId = user.UserId;
+                    selectedUser.UserName = user.UserName;
+                    selectedUser.Password = user.Password;
+                    selectedUser.Occupation = user.Occupation;
+                }
+                else
+                {
+                    selectedUser = value;
+                }
+                OnPropertyChanged(nameof(SelectedUser));
             }
         }
 
@@ -52,27 +52,29 @@ namespace WpfApp1.ViewModels.Admin
             {
                 users = new ObservableCollection<User>(db.Users.OrderBy(u => u.UserName).ToList());
             }
-
-            modifiedUser = new User();
         }
 
         [RelayCommand]
         public void UpdateUser()
         {
-            using (var db = new Repository())
+            if (SelectedUser != null) 
             {
-                User user = db.Users.Find(SelectedUser.UserName);
-                user.UserName = ModifiedUser.UserName;
-                user.Password = ModifiedUser.Password;
-                user.Occupation = ModifiedUser.Occupation;
-                
-                db.SaveChanges();
+                using (var db = new Repository())
+                {
+                    User user = db.Users.Find(SelectedUser.UserId);
+                    user.UserName = SelectedUser.UserName;
+                    user.Password = SelectedUser.Password;
+                    user.Occupation = SelectedUser.Occupation;
+
+                    db.SaveChanges();
+
+                    Users = new ObservableCollection<User>(db.Users.OrderBy(u => u.UserName).ToList());
+                }
             }
-            using (var db = new Repository())
+            else
             {
-                Users = new ObservableCollection<User>(db.Users.OrderBy(u => u.UserName).ToList());
+                MessageBox.Show("Please Select a User");
             }
-            SelectedUser = null;
         }
     }
 }
