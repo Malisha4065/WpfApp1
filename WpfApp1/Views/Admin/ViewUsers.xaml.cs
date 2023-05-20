@@ -27,13 +27,5 @@ namespace WpfApp1.Views.Admin
             DataContext = new ViewUsersVM();
             InitializeComponent();
         }
-
-        /*private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-                if (this.DataContext != null)
-                {
-                    ((dynamic)this.DataContext).originalUser = (User)((DataGrid)sender).SelectedItem;
-                }
-        }*/
     }
 }
