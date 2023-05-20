@@ -22,9 +22,13 @@ namespace WpfApp1.Views.Admin
     {
         public AdminWindow()
         {
-            DataContext = new AdminWindowVM();
+            /*DataContext = new AdminWindowVM();
+            InitializeComponent();*/
             InitializeComponent();
-
+            AdminWindowVM adminWindowVM = new AdminWindowVM();
+            DataContext = adminWindowVM;
+            if (adminWindowVM.CloseAction == null)
+                adminWindowVM.CloseAction = new Action(() => this.Close());
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

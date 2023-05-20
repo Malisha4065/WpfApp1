@@ -22,8 +22,13 @@ namespace WpfApp1.Views.Doctor
     {
         public DoctorWindow()
         {
-            DataContext = new DoctorWindowVM();
+            /*DataContext = new DoctorWindowVM();
+            InitializeComponent();*/
             InitializeComponent();
+            DoctorWindowVM doctorWindowVM = new DoctorWindowVM();
+            DataContext = doctorWindowVM;
+            if (doctorWindowVM.CloseAction == null)
+                doctorWindowVM.CloseAction = new Action(() => this.Close());
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

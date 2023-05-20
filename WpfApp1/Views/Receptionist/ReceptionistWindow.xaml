@@ -49,6 +49,27 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <ControlTemplate x:Key="ButtonT" TargetType="Button">
+            <Grid>
+                <Border x:Name="BorderButton" Height="40" Width="140" CornerRadius="10" BorderThickness="1.5" Background="#880E4F">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#E91E63" Offset="0.0"/>
+                            <GradientStop Color="#880E4F" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="{TemplateBinding Property=Content}" FontWeight="Bold"/>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="BorderButton" Property="Background" Value="#E91E63"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="BorderButton" Property="Background" Value="#424242"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Border CornerRadius="10" BorderThickness="5">
         <Border.BorderBrush>
@@ -82,6 +103,8 @@
                 <RadioButton Content="Add a Patient" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddPatientFormCommand}"/>
                 <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
+
+                <Button Content="LOG OUT" Template="{StaticResource ButtonT}" Margin="0,100,0,0" Command="{Binding LogOutCommand}"/>
             </StackPanel>
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"/>
         </Grid>

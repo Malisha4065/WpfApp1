@@ -15,11 +15,26 @@ namespace WpfApp1.ViewModels.Admin
         public AddDoctorVM addDoctorVM { get; set; }
         public ViewDoctorsVM viewDoctorsVM { get; set; }
 
+        private readonly WindowFactory windowFactory;
+        public Action CloseAction { get; set; }
+
         private object _currentView;
 
         public object CurrentView { 
             get { return _currentView; } 
             set {  _currentView = value; OnPropertyChanged(); } }
+
+        public AdminWindowVM()
+        {
+            windowFactory = new ProductionWindowFactory();
+        }
+
+        [RelayCommand]
+        public void LogOut()
+        {
+            windowFactory.CreateNewMainWindow();
+            CloseAction();
+        }
 
         [RelayCommand]
         public void AddUserForm()

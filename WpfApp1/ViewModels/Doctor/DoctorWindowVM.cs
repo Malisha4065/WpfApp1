@@ -16,6 +16,9 @@ namespace WpfApp1.ViewModels.Doctor
         public ViewPatientsVM viewPatientsVM { get; set; }
         public OverviewVM overviewVM { get; set; }
 
+        private readonly WindowFactory windowFactory;
+        public Action CloseAction { get; set; }
+
         private object _currentView;
 
         public object CurrentView
@@ -31,6 +34,14 @@ namespace WpfApp1.ViewModels.Doctor
         public DoctorWindowVM()
         {
             WeakReferenceMessenger.Default.Register<MessengerCfirst>(this);
+            windowFactory = new ProductionWindowFactory();
+        }
+
+        [RelayCommand]
+        public void LogOut()
+        {
+            windowFactory.CreateNewMainWindow();
+            CloseAction();
         }
 
         [RelayCommand]

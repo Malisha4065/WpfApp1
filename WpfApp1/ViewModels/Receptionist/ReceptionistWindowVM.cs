@@ -16,6 +16,10 @@ namespace WpfApp1.ViewModels.Receptionist
     {
         public AddPatientVM addPatientVM { get; set; }
         public ViewAllPatientsVM viewAllPatientsVM { get; set; }
+
+        private readonly WindowFactory windowFactory;
+        public Action CloseAction { get; set; }
+
         private object _currentView;
 
 		public object CurrentView
@@ -40,7 +44,12 @@ namespace WpfApp1.ViewModels.Receptionist
             CurrentView = viewAllPatientsVM;
         }
 
-        
+        [RelayCommand]
+        public void LogOut()
+        {
+            windowFactory.CreateNewMainWindow();
+            CloseAction();
+        }
 
         public ReceptionistWindowVM()
         {
@@ -48,7 +57,7 @@ namespace WpfApp1.ViewModels.Receptionist
             /* addPatientVM = new AddPatientVM();
              CurrentView = addPatientVM;*/
             addPatientVM = new AddPatientVM();
-
+            windowFactory = new ProductionWindowFactory();
         }
 
         public async void Receive(MessengerPatientToEditFirst message)

@@ -124,6 +124,7 @@ namespace WpfApp1
         void CreateNewDoctorWindow();
         void CreateNewReceptionistWindow();
         void CreateNewAdminWindow();
+        void CreateNewMainWindow();
     }
 
     public class ProductionWindowFactory : WindowFactory
@@ -144,6 +145,12 @@ namespace WpfApp1
         {
             AdminWindow adminWindow = new AdminWindow();
             adminWindow.Show();
+        }
+
+        public void CreateNewMainWindow()
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

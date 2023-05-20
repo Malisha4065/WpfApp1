@@ -22,8 +22,13 @@ namespace WpfApp1.Views.Receptionist
     {
         public ReceptionistWindow()
         {
-            DataContext = new ReceptionistWindowVM();
+            /*DataContext = new ReceptionistWindowVM();
+            InitializeComponent();*/
             InitializeComponent();
+            ReceptionistWindowVM receptionistWindowVM = new ReceptionistWindowVM();
+            DataContext = receptionistWindowVM;
+            if (receptionistWindowVM.CloseAction == null)
+                receptionistWindowVM.CloseAction = new Action(() => this.Close());
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
