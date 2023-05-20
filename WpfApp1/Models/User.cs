@@ -12,7 +12,11 @@ namespace WpfApp1.Models
     public class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] 
+        public int UserId { get; set; }
+
+        [Required]
+        [MinLength(5)]
+        [MaxLength(50)]
         public string UserName { get; set; }
 
         [Required]
