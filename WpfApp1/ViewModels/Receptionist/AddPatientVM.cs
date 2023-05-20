@@ -6,15 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using WpfApp1.Database;
+using WpfApp1.Messenger;
 using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Receptionist
 {
-    public partial class AddPatientVM : ObservableObject
+    public partial class AddPatientVM : ObservableObject, IRecipient<MessengerPatientToEdit>
     {
         [ObservableProperty]
-        public int patientId;
+        public int? patientId;
         [ObservableProperty]
         public string patientName;
         [ObservableProperty]
@@ -36,30 +38,46 @@ namespace WpfApp1.ViewModels.Receptionist
         [ObservableProperty]
         ObservableCollection<DoctorC> doctors;
 
-        
-
         [RelayCommand]
         public void InsertPatient()
         {
-            Patient patient = new Patient()
-            {
-                PatientId = PatientId,
-                PatientName = PatientName,
-                Gender = Gender,
-                City = City,
-                Disease = Disease,
-                //Doctor = Doctor,
-                Date = Date.Date.ToString("d"),
-                Time = Time,
-                Payment = Payment,
-                PhoneNumber = PhoneNumber
-            };
-
             using (var db = new Repository())
             {
-                patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
-                db.Patients.Add(patient);
-                db.SaveChanges();
+                if (db.Patients.Find(PatientId) != null)
+                {
+                    Patient patient = db.Patients.Find(PatientId);
+                    patient.PatientId = (int)PatientId;
+                    patient.PatientName = PatientName;
+                    patient.Gender = Gender;
+                    patient.City = City;
+                    patient.Disease = Disease;
+                    patient.Date = Date.Date.ToString("d");
+                    patient.Time = Time; 
+                    patient.Payment = Payment;
+                    patient.PhoneNumber = PhoneNumber;
+                    patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Patient patient = new Patient()
+                    {
+                        PatientId = (int)PatientId,
+                        PatientName = PatientName,
+                        Gender = Gender,
+                        City = City,
+                        Disease = Disease,
+                        Date = Date.Date.ToString("d"),
+                        Time = Time,
+                        Payment = Payment,
+                        PhoneNumber = PhoneNumber
+                    };
+
+                    patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
+                    db.Patients.Add(patient);
+                    db.SaveChanges();
+                }
             }
         }
 
@@ -74,12 +92,25 @@ namespace WpfApp1.ViewModels.Receptionist
 
         public AddPatientVM()
         {
+            Date = DateTime.Now;
+            PatientId = null;
+            WeakReferenceMessenger.Default.Register<MessengerPatientToEdit>(this);
             DoctorList();    
         }
 
-        public static DateTime Yesterday
+        public void Receive(MessengerPatientToEdit message)
         {
-            get { return DateTime.Now.AddDays(-1); }
+            Patient patient = message.Value;
+            PatientName = patient.PatientName;
+            PatientId = patient.PatientId;
+            Gender = patient.Gender;
+            City = patient.City;
+            Disease = patient.Disease;
+            Doctor = patient.Doctor;
+            Date = DateTime.Parse(patient.Date);
+            Time = patient.Time;
+            Payment = patient.Payment;
+            PhoneNumber = patient.PhoneNumber;
         }
     }
 }

@@ -22,4 +22,14 @@ namespace WpfApp1.Messenger
     {
         public MessengerOverviewDoc(DoctorC value) : base(value) { }
     }
+
+    public class MessengerPatientToEdit : ValueChangedMessage<Patient>
+    {
+        public MessengerPatientToEdit(Patient value) : base(value) { }
+    }
+
+    public class MessengerPatientToEditFirst : ValueChangedMessage<Patient>
+    {
+        public MessengerPatientToEditFirst(Patient value) : base(value) { }
+    }
 }

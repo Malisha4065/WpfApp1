@@ -12,8 +12,15 @@
         <viewModelReceptionist:ViewAllPatientsVM/>
     </UserControl.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding Patients}" Background="Transparent" CanUserAddRows="False" CanUserDeleteRows="False"
-                  AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" CanUserResizeColumns="False" CanUserReorderColumns="False" BorderBrush="Transparent" IsReadOnly="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.14*"/>
+        </Grid.RowDefinitions>
+        
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Patients}" Background="Transparent" CanUserAddRows="False" CanUserDeleteRows="False"
+                  AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" CanUserResizeColumns="True" CanUserReorderColumns="False" 
+                  BorderBrush="Transparent" IsReadOnly="True"
+                  SelectionMode="Single" SelectedItem="{Binding SelectedPatient}">
             <DataGrid.Resources>
                 
                 <Style TargetType="DataGridColumnHeader">
@@ -37,6 +44,11 @@
                     <Setter Property="Foreground" Value="#FAFAFA"/>
                     <Setter Property="BorderBrush" Value="#212121"/>
                     <Setter Property="BorderThickness" Value="1"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#424242"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="Transparent"/>
@@ -69,6 +81,33 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="[Select an entry and click update to update entry]" FontSize="14"
+                   Foreground="#FAFAFA" VerticalAlignment="Center"/>
+            <Button Name="UpdateButton" Margin="90 0 0 0" Command="{Binding UpdatePatientCommand}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Border x:Name="ButtonSubmit" Height="30" Width="100" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#E91E63" Offset="0.0"/>
+                                        <GradientStop Color="#880E4F" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="12"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>
 

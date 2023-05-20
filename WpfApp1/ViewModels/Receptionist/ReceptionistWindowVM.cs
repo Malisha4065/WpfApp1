@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using WpfApp1.Messenger;
 using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Receptionist
 {
-    public partial class ReceptionistWindowVM : ObservableObject
+    public partial class ReceptionistWindowVM : ObservableObject, IRecipient<MessengerPatientToEditFirst>
     {
         public AddPatientVM addPatientVM { get; set; }
         public ViewAllPatientsVM viewAllPatientsVM { get; set; }
@@ -26,7 +29,7 @@ namespace WpfApp1.ViewModels.Receptionist
         [RelayCommand]
         public void AddPatientForm ()
         {
-            addPatientVM = new AddPatientVM();
+            //addPatientVM = new AddPatientVM();
             CurrentView = addPatientVM;
         }
 
@@ -37,10 +40,34 @@ namespace WpfApp1.ViewModels.Receptionist
             CurrentView = viewAllPatientsVM;
         }
 
+        
+
         public ReceptionistWindowVM()
         {
-           /* addPatientVM = new AddPatientVM();
-            CurrentView = addPatientVM;*/
+            WeakReferenceMessenger.Default.Register<MessengerPatientToEditFirst>(this);
+            /* addPatientVM = new AddPatientVM();
+             CurrentView = addPatientVM;*/
+            addPatientVM = new AddPatientVM();
+
+        }
+
+        public async void Receive(MessengerPatientToEditFirst message)
+        {
+            Task userControlTask = userControlAddPatient();
+            Task messageTask = sendMessageAddPatient(message.Value);
+
+            await userControlTask;
+            await messageTask;
+        }
+        private async Task userControlAddPatient()
+        {
+            await Task.Delay(100);
+            CurrentView = addPatientVM;
+        }
+        private async Task sendMessageAddPatient(Patient patient)
+        {
+            await Task.Delay(150);
+            WeakReferenceMessenger.Default.Send(new MessengerPatientToEdit(patient));
         }
     }
 }

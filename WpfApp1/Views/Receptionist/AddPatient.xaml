@@ -30,7 +30,7 @@
     <Grid>
         <StackPanel Margin="105 0 105 30">
             <Label Content="Patient Name:"/>
-            <TextBox Name="PatientNameTxtBox" Text="{Binding PatientName, Mode=OneWayToSource}"/>
+            <TextBox Name="PatientNameTxtBox" Text="{Binding PatientName}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Gender: "/>
                 <Label Content="Patient ID: " Margin="165 0 0 0"/>
@@ -40,43 +40,38 @@
                     <ComboBoxItem Tag="Male" Content="Male" IsSelected="True"/>
                     <ComboBoxItem Tag="Female" Content="Female"/>
                 </ComboBox>
-                <TextBox Name="PatientIDTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding PatientId, Mode=OneWayToSource}"/>
+                <TextBox Name="PatientIDTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding PatientId}"/>
             </StackPanel>
             <Label Content="Disease: "/>
-            <TextBox Name="DiseaseTxtBox" Width="400" Text="{Binding Disease, Mode=OneWayToSource}"/>
+            <TextBox Name="DiseaseTxtBox" Width="400" Text="{Binding Disease}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Doctor: "/>
                 <Label Content="Payment(Rupees): " Margin="166 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Name="DoctorBox" Width="180" FontSize="10" ItemsSource="{Binding Doctors}"  SelectedItem="{Binding Doctor}" SelectedValuePath="DoctorID">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Payment, Mode=OneWayToSource}"/>
+                <ComboBox Name="DoctorBox" Width="180" FontSize="10" ItemsSource="{Binding Doctors}"  SelectedItem="{Binding Doctor}"
+                          SelectedValue="{Binding Doctor.DoctorID}" SelectedValuePath="DoctorID" DisplayMemberPath="Name"/>
+                <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Payment}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="City: "/>
                 <Label Content="Phone Number: " Margin="180 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBox Name="CityTxtBox" Width="180" Text="{Binding City, Mode=OneWayToSource}"/>
-                <TextBox Name="PhoneNoBox" Width="190" Margin="30 0 0 0" Text="{Binding PhoneNumber, Mode=OneWayToSource}"/>
+                <TextBox Name="CityTxtBox" Width="180" Text="{Binding City}"/>
+                <TextBox Name="PhoneNoBox" Width="190" Margin="30 0 0 0" Text="{Binding PhoneNumber}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Appointment Date: "/>
                 <Label Content="Appointment Time: " Margin="116 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, Mode=OneWayToSource, FallbackValue={x:Static sys:DateTime.Now}}">
+                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, FallbackValue={x:Static sys:DateTime.Now}}">
                     <DatePicker.BlackoutDates>
-                        <CalendarDateRange Start="01/01/0001" End="{x:Static viewModelReceptionist:AddPatientVM.Yesterday}"/>
+                        <CalendarDateRange Start="01/01/0001" End="12/31/2022"/>
                     </DatePicker.BlackoutDates>
                 </DatePicker>
-                <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time, Mode=OneWayToSource}"/>
+                <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time}"/>
             </StackPanel>
             <Button Name="PatientSubmitButton" Margin="0 10 0 0" Command="{Binding InsertPatientCommand}">
                 <Button.Template>
