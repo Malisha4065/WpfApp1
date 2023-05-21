@@ -30,22 +30,12 @@
         <StackPanel Margin="105 0 105 30">
             <Label Content="User Name: "/>
             <TextBox Name="UserNameTxtBox" Text="{Binding UserName}"/>
-            <!--<Label Content="Doctor ID: "/>
-            <TextBox Name="DoctorIdTxtBox" Text="{Binding DoctorId}"/>-->
             <Label Content="Name: "/>
             <TextBox Name="NameTxtBox" Text="{Binding Name}"/>
             <Label Content="Specialization: "/>
             <TextBox Name="SpecializationTxtBox" Text="{Binding Specialization}"/>
             <Label Content="User Password: "/>
-            <PasswordBox Name="UserPasswordBox" Height="20" FontSize="10"
-                         Foreground="#FAFAFA" Background="Transparent" 
-                         BorderBrush="#FAFAFA" BorderThickness="0,0,0,1"
-                         CaretBrush="#FAFAFA" PasswordChanged="UserPasswordBox_PasswordChanged"/>
-            <Label Content="Re-Enter Password: "/>
-            <PasswordBox Name="ReEnterPasswordBox" Height="20" FontSize="10"
-                         Foreground="#FAFAFA" Background="Transparent" 
-                         BorderBrush="#FAFAFA" BorderThickness="0,0,0,1"
-                         CaretBrush="#FAFAFA" PasswordChanged="ReEnterPasswordBox_PasswordChanged"/>
+            <TextBox Name="PasswordTxtBox" Text="{Binding Password}"/>
             <Button Name="UserSubmitButton" Margin="0 10 0 0" Command="{Binding SubmitNewDoctorCommand}">
                 <Button.Template>
                     <ControlTemplate>

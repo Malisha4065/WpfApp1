@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using WpfApp1.Messenger;
+using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Admin
 {
-    public partial class AdminWindowVM : ObservableObject
+    public partial class AdminWindowVM : ObservableObject, IRecipient<MessengerDoctorToAddFirst>
     {
         public AddUserVM addUserVM { get; set; }
         public ViewUsersVM viewUsersVM { get; set; }
@@ -26,7 +29,9 @@ namespace WpfApp1.ViewModels.Admin
 
         public AdminWindowVM()
         {
+            WeakReferenceMessenger.Default.Register<MessengerDoctorToAddFirst>(this);
             windowFactory = new ProductionWindowFactory();
+            addDoctorVM = new AddDoctorVM();
         }
 
         [RelayCommand]
@@ -53,7 +58,7 @@ namespace WpfApp1.ViewModels.Admin
         [RelayCommand]
         public void AddDoctorForm()
         {
-            addDoctorVM = new AddDoctorVM();
+            /*addDoctorVM = new AddDoctorVM();*/
             CurrentView = addDoctorVM;
         }
 
@@ -62,6 +67,29 @@ namespace WpfApp1.ViewModels.Admin
         {
             viewDoctorsVM = new ViewDoctorsVM();
             CurrentView = viewDoctorsVM;
+        }
+
+        public async void Receive(MessengerDoctorToAddFirst message)
+        {
+            /*User user = message.Value;
+            WeakReferenceMessenger.Default.Send(new MessengerDoctorToAdd(user));
+            CurrentView = addDoctorVM;*/
+
+            Task userControlTask = userControlAddDoctor();
+            Task messageTask = sendMessageAddDoctor(message.Value);
+
+            await userControlTask;
+            await messageTask;
+        }
+        private async Task userControlAddDoctor()
+        {
+            await Task.Delay(100);
+            CurrentView = addDoctorVM;
+        }
+        private async Task sendMessageAddDoctor(User user)
+        {
+            await Task.Delay(150);
+            WeakReferenceMessenger.Default.Send(new MessengerDoctorToAdd(user));
         }
     }
 }

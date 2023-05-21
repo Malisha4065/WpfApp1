@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.EntityFrameworkCore.Internal;
 using WpfApp1.Database;
+using WpfApp1.Messenger;
 using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Admin
@@ -62,6 +64,16 @@ namespace WpfApp1.ViewModels.Admin
                 using (var db = new Repository())
                 {
                     User user = db.Users.Find(SelectedUser.UserId);
+                    bool cancel = false;
+                    if (user.Occupation == "Doctor" && SelectedUser.Occupation != "Doctor")
+                        cancel = UpdateDoctorTable(SelectedUser.UserId);
+                    if (user.Occupation != "Doctor" && SelectedUser.Occupation == "Doctor")
+                    {
+                        CreateDoctorEntry(SelectedUser.UserId);
+                        cancel = true;
+                    }
+                    if (cancel)
+                        return;
                     user.UserName = SelectedUser.UserName;
                     user.Password = SelectedUser.Password;
                     user.Occupation = SelectedUser.Occupation;
@@ -75,6 +87,33 @@ namespace WpfApp1.ViewModels.Admin
             {
                 MessageBox.Show("Please Select a User");
             }
+        }
+
+        public bool UpdateDoctorTable(int id)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("This will remove all information regarding this Doctor entry.",
+                "Confirm Delete", MessageBoxButton.YesNo);
+            
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                using (var db = new Repository())
+                {
+                    DoctorC doctor = db.Doctors.Find(id);
+                    db.Doctors.Remove(doctor);
+                    db.SaveChanges();
+                }
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("Updating cancelled");
+                return true;
+            }
+        }
+
+        public void CreateDoctorEntry(int id)
+        {
+            WeakReferenceMessenger.Default.Send(new MessengerDoctorToAddFirst(SelectedUser));
         }
     }
 }

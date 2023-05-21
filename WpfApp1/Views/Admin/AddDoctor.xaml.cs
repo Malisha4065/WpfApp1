@@ -26,17 +26,5 @@ namespace WpfApp1.Views.Admin
             DataContext = new AddDoctorVM();
             InitializeComponent();
         }
-
-        private void ReEnterPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { ((dynamic)this.DataContext).ReEnteredPassword = ((PasswordBox)sender).Password; }
-        }
-
-        private void UserPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
-        }
     }
 }
