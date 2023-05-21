@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,19 +92,21 @@ namespace WpfApp1
                 {
                     MessageBox.Show("Permission Granted");
                     
-                        if (Users[userIndex].Occupation == "Doctor")
+                    if (Users[userIndex].Occupation == "Doctor")
+                    {
+                        windowFactory.CreateNewDoctorWindow();
+                        DoctorC doctor;
+                        using (Repository repo = new Repository())
                         {
-                            windowFactory.CreateNewDoctorWindow();
-                            using (Repository repo = new Repository())
-                            {
-                                List<DoctorC> doctorCs = repo.Doctors.Include("Patients").ToList();
-                                WeakReferenceMessenger.Default.Send(new MessengerCfirst(doctorCs[0]));
-                            }
+                            int userIdNo = Users[userIndex].UserId;
+                            doctor = repo.Doctors.Include(d => d.Patients).FirstOrDefault(d => d.DoctorID == userIdNo);
+                        }
+                        WeakReferenceMessenger.Default.Send(new MessengerCfirst(doctor));
                     }
                     else if (Users[userIndex].Occupation == "Receptionist")
-                            windowFactory.CreateNewReceptionistWindow();
-                        else if (Users[userIndex].Occupation == "Admin")
-                            windowFactory.CreateNewAdminWindow();
+                        windowFactory.CreateNewReceptionistWindow();
+                    else if (Users[userIndex].Occupation == "Admin")
+                        windowFactory.CreateNewAdminWindow();
                     
                     CloseAction();
                 }

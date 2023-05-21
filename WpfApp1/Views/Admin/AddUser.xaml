@@ -43,9 +43,9 @@
             <Label Content="Occupation: "/>
             <ComboBox Name="OccupationPicker" FontSize="10" Height="20" SelectedValue="{Binding Occupation}" SelectedValuePath="Content">
                 <ComboBoxItem Content="Admin"/>
-                <ComboBoxItem Content="Doctor"/>
                 <ComboBoxItem Content="Receptionist"/>
             </ComboBox>
+            <Label Content="To add a Doctor use Add Doctor window" FontSize="10" Foreground="Crimson"/>
             <Button Name="UserSubmitButton" Margin="0 10 0 0" Command="{Binding SubmitNewUserCommand}">
                 <Button.Template>
                     <ControlTemplate>

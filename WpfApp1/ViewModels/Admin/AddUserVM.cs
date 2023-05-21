@@ -34,11 +34,7 @@ namespace WpfApp1.ViewModels.Admin
                 {
                     repo.Users.Add(user);
                     repo.SaveChanges();
-
-                   
-
                 }
-
 
                 MessageBox.Show("User Added Successfully");
             }

@@ -11,6 +11,7 @@ namespace WpfApp1.Models
     public class DoctorC
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DoctorID { get; set; }
         [Required] 
         public string Name { get; set; }
