@@ -101,7 +101,7 @@
                 <RadioButton Content="Overview" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}" Command="{Binding ViewOverviewCommand}"/>
                 <RadioButton Content="Appointments" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="View Patients" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllPatientsCommand}"/>
-                <RadioButton Content="Edit Patient" FontSize="22" Style="{StaticResource SideBar}"/>
+                <RadioButton Content="Edit Patient" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAddPatientCommand}"/>
                 <RadioButton Content="Add a Report" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
                 <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>

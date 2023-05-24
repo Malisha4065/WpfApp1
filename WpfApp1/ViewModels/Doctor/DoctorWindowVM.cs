@@ -11,10 +11,11 @@ using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Doctor
 {
-    public partial class DoctorWindowVM : ObservableObject, IRecipient<MessengerCfirst>
+    public partial class DoctorWindowVM : ObservableObject, IRecipient<MessengerCfirst>, IRecipient<MessengerPatientOfDoctorToEditFirst>
     {
         public ViewPatientsVM viewPatientsVM { get; set; }
         public OverviewVM overviewVM { get; set; }
+        public AddPatientForDoctorVM addPatientForDoctorVM { get; set; }
 
         private readonly WindowFactory windowFactory;
         public Action CloseAction { get; set; }
@@ -34,7 +35,9 @@ namespace WpfApp1.ViewModels.Doctor
         public DoctorWindowVM()
         {
             WeakReferenceMessenger.Default.Register<MessengerCfirst>(this);
+            WeakReferenceMessenger.Default.Register<MessengerPatientOfDoctorToEditFirst>(this);
             windowFactory = new ProductionWindowFactory();
+            addPatientForDoctorVM = new AddPatientForDoctorVM();
         }
 
         [RelayCommand]
@@ -90,11 +93,36 @@ namespace WpfApp1.ViewModels.Doctor
             WeakReferenceMessenger.Default.Send(new MessengerC(Doctor));
         }
 
+        [RelayCommand]
+        public void ViewAddPatient()
+        {
+            CurrentView = addPatientForDoctorVM;
+        }
+
         private DoctorC Doctor;
         public void Receive(MessengerCfirst message)
         {
             Doctor = message.Value;
             ViewOverview();
+        }
+
+        public async void Receive(MessengerPatientOfDoctorToEditFirst message)
+        {
+            Task userControlTask = userControlAddPatient();
+            Task messageTask = sendMessageAddPatient(message.Value);
+
+            await userControlTask;
+            await messageTask;
+        }
+        private async Task userControlAddPatient()
+        {
+            await Task.Delay(100);
+            CurrentView = addPatientForDoctorVM;
+        }
+        private async Task sendMessageAddPatient(Patient patient)
+        {
+            await Task.Delay(150);
+            WeakReferenceMessenger.Default.Send(new MessengerPatientOfDoctorToEdit(patient));
         }
     }
 }
