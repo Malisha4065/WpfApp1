@@ -25,6 +25,7 @@ namespace WpfApp1.Views.Admin
             /*DataContext = new AdminWindowVM();
             InitializeComponent();*/
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             AdminWindowVM adminWindowVM = new AdminWindowVM();
             DataContext = adminWindowVM;
             if (adminWindowVM.CloseAction == null)
@@ -48,5 +49,18 @@ namespace WpfApp1.Views.Admin
         {
             Application.Current.Shutdown();
         }
+
+        private void Maximize_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+            }
+        }
+
     }
 }

@@ -31,7 +31,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" Background="Transparent"
                   CanUserAddRows="False" CanUserDeleteRows="False"
@@ -90,8 +90,12 @@
             <GroupBox.Header>
                 <Label Content="Update User Details: " Width="120" FontSize="12"/>
             </GroupBox.Header>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Username    : "/>
                         <TextBox Text="{Binding SelectedUser.UserName}"/>
@@ -110,51 +114,53 @@
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>
-                <Button Name="UpdateButton" Margin="35 0 0 0" Command="{Binding UpdateUserCommand}">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Grid>
-                                <Border x:Name="ButtonSubmit" Height="40" Width="100" CornerRadius="20" BorderThickness="1.5" Background="#E91E63">
-                                    <Border.BorderBrush>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#E91E63" Offset="0.0"/>
-                                            <GradientStop Color="#880E4F" Offset="1.0"/>
-                                        </LinearGradientBrush>
-                                    </Border.BorderBrush>
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="14"/>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button Name="DeleteButton" Margin="20 0 0 0" Command="{Binding DeleteUserCommand}">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Grid>
-                                <Border x:Name="ButtonSubmit" Height="40" Width="100" CornerRadius="20" BorderThickness="1.5" Background="#E91E63">
-                                    <Border.BorderBrush>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#E91E63" Offset="0.0"/>
-                                            <GradientStop Color="#880E4F" Offset="1.0"/>
-                                        </LinearGradientBrush>
-                                    </Border.BorderBrush>
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Delete" FontWeight="Bold" FontSize="14"/>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <Button Name="UpdateButton" Command="{Binding UpdateUserCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border x:Name="ButtonSubmit" Height="40" Width="100" CornerRadius="20" BorderThickness="1.5" Background="#E91E63">
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#E91E63" Offset="0.0"/>
+                                                <GradientStop Color="#880E4F" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="14"/>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Name="DeleteButton" Margin="20 0 20 0" Command="{Binding DeleteUserCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border x:Name="ButtonSubmit" Height="40" Width="100" CornerRadius="20" BorderThickness="1.5" Background="#E91E63">
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#E91E63" Offset="0.0"/>
+                                                <GradientStop Color="#880E4F" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Delete" FontWeight="Bold" FontSize="14"/>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>
