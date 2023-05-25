@@ -7,12 +7,13 @@
         xmlns:viewModel="clr-namespace:WpfApp1.ViewModels.Admin"
         mc:Ignorable="d"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="450" Width="800"
+        MinHeight="450" MinWidth="800">
     <Window.DataContext>
         <viewModel:AdminWindowVM/>
     </Window.DataContext>
@@ -93,21 +94,34 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="500,0,0,0">
-                <Button Grid.Column="1" Content="-" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
-                <Button Grid.Column="2" Content="x" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="5 0 0 0" />
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0">
-                <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
-                <RadioButton Content="Add User" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddUserFormCommand}"/>
-                <RadioButton Content="View Users" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllUsersCommand}"/>
-                <RadioButton Content="Add Doctor" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddDoctorFormCommand}"/>
-                <RadioButton Content="View Doctors" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllDoctorsCommand}"/>
-                <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
-                <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="-" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
+                    <Button Content="o" Template="{StaticResource UpperButtons}" Click="Maximize_Clicked" Margin="0 0 10 0"/>
+                    <Button Content="x" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="0 0 20 0"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
+                    <RadioButton Content="Add User" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddUserFormCommand}"/>
+                    <RadioButton Content="View Users" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllUsersCommand}"/>
+                    <RadioButton Content="Add Doctor" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddDoctorFormCommand}"/>
+                    <RadioButton Content="View Doctors" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllDoctorsCommand}"/>
+                    <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
+                    <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
 
-                <Button Content="LOG OUT" Template="{StaticResource ButtonT}" Margin="0,70,0,0" Command="{Binding LogOutCommand}"/>
-            </StackPanel>
+                </StackPanel>
+                <Button Grid.Row="1" Content="LOG OUT" Template="{StaticResource ButtonT}" Command="{Binding LogOutCommand}"/>
+            </Grid>
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"/>
         </Grid>
     </Border>
