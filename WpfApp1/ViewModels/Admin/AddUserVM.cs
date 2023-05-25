@@ -13,15 +13,24 @@ namespace WpfApp1.ViewModels.Admin
 {
     public partial class AddUserVM : ObservableObject
     {
-        public string UserName { get; set; }
-        public string Password { private get; set; }
-        public string ReEnteredPassword { private get; set; }
-        public string Occupation { get; set; }
+        [ObservableProperty]
+        public string userName;
+        [ObservableProperty]
+        public string password;
+        [ObservableProperty] 
+        public string occupation;
+
+        public AddUserVM()
+        {
+            UserName = "";
+            Password = "";
+            Occupation = "";
+        }
 
         [RelayCommand]
         public void SubmitNewUser ()
         {
-            if (Password == ReEnteredPassword)
+            if (UserName != "" && Password != "" && Occupation != "")
             {
                 User user = new User()
                 {
@@ -35,12 +44,14 @@ namespace WpfApp1.ViewModels.Admin
                     repo.Users.Add(user);
                     repo.SaveChanges();
                 }
-
+                UserName = "";
+                Password = "";
+                Occupation = "";
                 MessageBox.Show("User Added Successfully");
             }
             else
             {
-                MessageBox.Show("Passwords don't match!");
+                MessageBox.Show("Please Fill All Fields to Add the Entry.");
             }
             
         }

@@ -8,6 +8,7 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore;
 using WpfApp1.Database;
 using WpfApp1.Messenger;
 using WpfApp1.Models;
@@ -36,6 +37,47 @@ namespace WpfApp1.ViewModels.Doctor
             else
             {
                 MessageBox.Show("Please Select a Patient to Update");
+            }
+        }
+
+        [RelayCommand]
+        public void DeletePatient()
+        {
+            try
+            {
+                if (SelectedPatient != null)
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure to remove this patient entry?",
+                            "Confirm Delete", MessageBoxButton.YesNo);
+
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        using (var db = new Repository())
+                        {
+                            Patient patient = db.Patients.Find(SelectedPatient.PatientId);
+                            db.Patients.Remove(patient);
+                            db.SaveChanges();
+
+                            DoctorC tempdoctor = db.Doctors.Include(d => d.Patients).FirstOrDefault(d => d.DoctorID == Doctor.DoctorID);
+                            Patients = new ObservableCollection<Patient>(tempdoctor.Patients.ToList());
+                            WeakReferenceMessenger.Default.Send(new MessengerSendBackUpdatedDoctor(tempdoctor));
+                            MessageBox.Show("Patient Removed Successfully!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Deletion Cancelled.");
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please Select a Patient to Delete.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
             }
         }
 

@@ -31,15 +31,7 @@
             <Label Content="User Name: "/>
             <TextBox Name="UserNameTxtBox" Text="{Binding UserName}"/>
             <Label Content="User Password: "/>
-            <PasswordBox Name="UserPasswordBox" Height="20" FontSize="10"
-                         Foreground="#FAFAFA" Background="Transparent" 
-                         BorderBrush="#FAFAFA" BorderThickness="0,0,0,1"
-                         CaretBrush="#FAFAFA" PasswordChanged="UserPasswordBox_PasswordChanged"/>
-            <Label Content="Re-Enter Password: "/>
-            <PasswordBox Name="ReEnterPasswordBox" Height="20" FontSize="10"
-                         Foreground="#FAFAFA" Background="Transparent" 
-                         BorderBrush="#FAFAFA" BorderThickness="0,0,0,1"
-                         CaretBrush="#FAFAFA" PasswordChanged="ReEnterPasswordBox_PasswordChanged"/>
+            <TextBox Name="PasswordTxtBox" Text="{Binding Password}"/>
             <Label Content="Occupation: "/>
             <ComboBox Name="OccupationPicker" FontSize="10" Height="20" SelectedValue="{Binding Occupation}" SelectedValuePath="Content">
                 <ComboBoxItem Content="Admin"/>

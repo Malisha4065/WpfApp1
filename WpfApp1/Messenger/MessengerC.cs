@@ -52,4 +52,9 @@ namespace WpfApp1.Messenger
     {
         public MessengerPatientOfDoctorToEditFirst(Patient value) : base(value) { }
     }
+
+    public class MessengerSendBackUpdatedDoctor : ValueChangedMessage<DoctorC>
+    {
+        public MessengerSendBackUpdatedDoctor(DoctorC value) : base(value) { }
+    }
 }

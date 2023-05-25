@@ -115,5 +115,69 @@ namespace WpfApp1.ViewModels.Admin
         {
             WeakReferenceMessenger.Default.Send(new MessengerDoctorToAddFirst(SelectedUser));
         }
+
+        [RelayCommand]
+        public void DeleteUser()
+        {
+            try
+            {
+                if (SelectedUser != null)
+                {
+                    using (var db = new Repository())
+                    {
+                        User user = db.Users.Find(SelectedUser.UserId);
+
+                        if (user.Occupation == "Doctor")
+                        {
+                            MessageBoxResult messageBoxResult = MessageBox.Show("This will remove all information regarding this Doctor entry.",
+                            "Confirm Delete", MessageBoxButton.YesNo);
+
+                            if (messageBoxResult == MessageBoxResult.Yes)
+                            {
+                                db.Users.Remove(user);
+                                DoctorC doctor = db.Doctors.Find(SelectedUser.UserId);
+                                db.Doctors.Remove(doctor);
+                                db.SaveChanges();
+
+                                Users = new ObservableCollection<User>(db.Users.OrderBy(u => u.UserName).ToList());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Deletion Cancelled.");
+                                return;
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to delete this Entry?",
+                            "Confirm Delete", MessageBoxButton.YesNo);
+
+                            if (messageBoxResult == MessageBoxResult.Yes)
+                            {
+                                db.Users.Remove(user);
+                                db.SaveChanges();
+
+                                Users = new ObservableCollection<User>(db.Users.OrderBy(u => u.UserName).ToList());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Deletion Cancelled.");
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select a User to Delete");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }       
+        }
+ 
     }
 }

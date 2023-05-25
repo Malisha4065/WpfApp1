@@ -40,7 +40,46 @@ namespace WpfApp1.ViewModels.Receptionist
             }
             else
             {
-                MessageBox.Show("Please Select a Patient to Update");
+                MessageBox.Show("Please Select a Patient to Update.");
+            }
+        }
+
+        [RelayCommand]
+        public void DeletePatient()
+        {
+            try
+            {
+                if (SelectedPatient != null)
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure to remove this patient entry?",
+                            "Confirm Delete", MessageBoxButton.YesNo);
+
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        using (var db = new Repository())
+                        {
+                            Patient patient = db.Patients.Find(SelectedPatient.PatientId);
+                            db.Patients.Remove(patient);
+                            db.SaveChanges();
+
+                            Patients = new ObservableCollection<Patient>(db.Patients.Include("Doctor").OrderBy(p => p.PatientId).ToList());
+                            MessageBox.Show("Patient Removed Successfully!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Deletion Cancelled.");
+                        return;
+                    }         
+                }
+                else
+                {
+                    MessageBox.Show("Please Select a Patient to Delete.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
             }
         }
     }

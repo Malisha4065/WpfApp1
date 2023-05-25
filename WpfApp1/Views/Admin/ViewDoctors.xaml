@@ -98,7 +98,7 @@
                         <TextBox Text="{Binding SelectedDoctor.Specialization}"/>
                     </StackPanel>
                 </StackPanel>
-                <Button Name="UpdateButton" Margin="90 0 0 0" Command="{Binding UpdateDoctorCommand}">
+                <Button Name="UpdateButton" Margin="35 0 0 0" Command="{Binding UpdateDoctorCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid>
@@ -110,6 +110,28 @@
                                         </LinearGradientBrush>
                                     </Border.BorderBrush>
                                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="14"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="DeleteButton" Margin="20 0 0 0" Command="{Binding DeleteDoctorCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Border x:Name="ButtonSubmit" Height="40" Width="100" CornerRadius="20" BorderThickness="1.5" Background="#E91E63">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#E91E63" Offset="0.0"/>
+                                            <GradientStop Color="#880E4F" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Delete" FontWeight="Bold" FontSize="14"/>
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>

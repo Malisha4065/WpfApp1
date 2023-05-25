@@ -11,7 +11,7 @@ using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Doctor
 {
-    public partial class DoctorWindowVM : ObservableObject, IRecipient<MessengerCfirst>, IRecipient<MessengerPatientOfDoctorToEditFirst>
+    public partial class DoctorWindowVM : ObservableObject, IRecipient<MessengerCfirst>, IRecipient<MessengerPatientOfDoctorToEditFirst>, IRecipient<MessengerSendBackUpdatedDoctor>
     {
         public ViewPatientsVM viewPatientsVM { get; set; }
         public OverviewVM overviewVM { get; set; }
@@ -36,6 +36,7 @@ namespace WpfApp1.ViewModels.Doctor
         {
             WeakReferenceMessenger.Default.Register<MessengerCfirst>(this);
             WeakReferenceMessenger.Default.Register<MessengerPatientOfDoctorToEditFirst>(this);
+            WeakReferenceMessenger.Default.Register<MessengerSendBackUpdatedDoctor>(this);
             windowFactory = new ProductionWindowFactory();
             addPatientForDoctorVM = new AddPatientForDoctorVM();
         }
@@ -123,6 +124,11 @@ namespace WpfApp1.ViewModels.Doctor
         {
             await Task.Delay(150);
             WeakReferenceMessenger.Default.Send(new MessengerPatientOfDoctorToEdit(patient));
+        }
+
+        public void Receive(MessengerSendBackUpdatedDoctor message)
+        {
+            Doctor = message.Value;
         }
     }
 }

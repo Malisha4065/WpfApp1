@@ -42,62 +42,69 @@ namespace WpfApp1.ViewModels.Receptionist
         [RelayCommand]
         public void InsertPatient()
         {
-            if (PatientName != "" && Doctor != null)
+            try
             {
-                using (var db = new Repository())
+                if (PatientName != "" && Doctor != null)
                 {
-                    if (db.Patients.Find(PatientId) != null)
+                    using (var db = new Repository())
                     {
-                        Patient patient = db.Patients.Find(PatientId);
-                        patient.PatientId = (int)PatientId;
-                        patient.PatientName = PatientName;
-                        patient.Gender = Gender;
-                        patient.City = City;
-                        patient.Disease = Disease;
-                        patient.Date = Date.Date.ToString("d");
-                        patient.Time = Time;
-                        patient.Payment = Payment;
-                        patient.PhoneNumber = PhoneNumber;
-                        patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
-
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        Patient patient = new Patient()
+                        if (db.Patients.Find(PatientId) != null)
                         {
-                            PatientId = (int)PatientId,
-                            PatientName = PatientName,
-                            Gender = Gender,
-                            City = City,
-                            Disease = Disease,
-                            Date = Date.Date.ToString("d"),
-                            Time = Time,
-                            Payment = Payment,
-                            PhoneNumber = PhoneNumber
-                        };
+                            Patient patient = db.Patients.Find(PatientId);
+                            patient.PatientId = (int)PatientId;
+                            patient.PatientName = PatientName;
+                            patient.Gender = Gender;
+                            patient.City = City;
+                            patient.Disease = Disease;
+                            patient.Date = Date.Date.ToString("d");
+                            patient.Time = Time;
+                            patient.Payment = Payment;
+                            patient.PhoneNumber = PhoneNumber;
+                            patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
 
-                        patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
-                        db.Patients.Add(patient);
-                        db.SaveChanges();
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Patient patient = new Patient()
+                            {
+                                PatientId = (int)PatientId,
+                                PatientName = PatientName,
+                                Gender = Gender,
+                                City = City,
+                                Disease = Disease,
+                                Date = Date.Date.ToString("d"),
+                                Time = Time,
+                                Payment = Payment,
+                                PhoneNumber = PhoneNumber
+                            };
+
+                            patient.Doctor = db.Doctors.Find(Doctor.DoctorID);
+                            db.Patients.Add(patient);
+                            db.SaveChanges();
+                        }
                     }
+                    Doctor = null;
+                    PatientName = "";
+                    Gender = "";
+                    City = "";
+                    Disease = "";
+                    Date = DateTime.Now;
+                    Time = "";
+                    Payment = "";
+                    PhoneNumber = "";
+                    PatientId = null;
+                    MessageBox.Show("Patient Added Successfully!");
                 }
-                Doctor = null;
-                PatientName = "";
-                Gender = "";
-                City = "";
-                Disease = "";
-                Date = DateTime.Now;
-                Time = "";
-                Payment = "";
-                PhoneNumber = "";
-                PatientId = null;
-                MessageBox.Show("Patient Added Successfully!");
+                else
+                {
+                    MessageBox.Show("Please Fill Out The Required Fields");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please Fill Out The Required Fields");
-            }
+                MessageBox.Show(ex.Message, "Error!");
+            } 
         }
 
         public void DoctorList()
