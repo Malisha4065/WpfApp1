@@ -14,11 +14,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.14*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         
         <DataGrid Grid.Row="0" ItemsSource="{Binding Patients}" Background="Transparent" CanUserAddRows="False" CanUserDeleteRows="False"
-              AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" CanUserResizeColumns="False" 
+              AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" CanUserResizeColumns="True" 
                   CanUserReorderColumns="False" BorderBrush="Transparent" IsReadOnly="True" SelectionMode="Single" SelectedItem="{Binding SelectedPatient}">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
@@ -64,65 +64,71 @@
             </DataGrid.Resources>
             
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding PatientId}"/>
-                <DataGridTextColumn Header="Patient Name" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding City}"/>
-                <DataGridTextColumn Header="Disease" Binding="{Binding Disease}"/>
-                <DataGridTextColumn Header="Appointment Date" Binding="{Binding Date}"/>
-                <DataGridTextColumn Header="Appointment Time" Binding="{Binding Time}"/>
-                <DataGridTextColumn Header="Payment(Rs.)" Binding="{Binding Payment}"/>
-                <DataGridTextColumn Header="Telephone Number" Binding="{Binding PhoneNumber}"/>
-                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding PatientId}" Width="0.4*"/>
+                <DataGridTextColumn Header="Patient Name" Binding="{Binding PatientName}" Width="*"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="0.8*"/>
+                <DataGridTextColumn Header="Disease" Binding="{Binding Disease}" Width="*"/>
+                <DataGridTextColumn Header="Appointment Date" Binding="{Binding Date}" Width="*"/>
+                <DataGridTextColumn Header="Appointment Time" Binding="{Binding Time}" Width="0.7*"/>
+                <DataGridTextColumn Header="Payment(Rs.)" Binding="{Binding Payment}" Width="0.7*"/>
+                <DataGridTextColumn Header="Telephone Number" Binding="{Binding PhoneNumber}" Width="*"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.8*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Label Content="[Select an entry and click update/delete to update/delete entry]" FontSize="12"
-                   Foreground="#FAFAFA" VerticalAlignment="Center"/>
-            <Button Name="UpdateButton" Margin="10 0 0 0" Command="{Binding UpdatePatientCommand}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Border x:Name="ButtonSubmit" Height="30" Width="100" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
-                                <Border.BorderBrush>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#E91E63" Offset="0.0"/>
-                                        <GradientStop Color="#880E4F" Offset="1.0"/>
-                                    </LinearGradientBrush>
-                                </Border.BorderBrush>
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="12"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button Name="DeleteButton" Margin="15 0 0 0" Command="{Binding DeletePatientCommand}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Border x:Name="ButtonSubmit" Height="30" Width="100" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
-                                <Border.BorderBrush>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#E91E63" Offset="0.0"/>
-                                        <GradientStop Color="#880E4F" Offset="1.0"/>
-                                    </LinearGradientBrush>
-                                </Border.BorderBrush>
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Delete" FontWeight="Bold" FontSize="12"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="[Select an entry and click to update/delete entry]" FontSize="12"
+                   Foreground="#FAFAFA" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="UpdateButton" Margin="15 0 0 0" Command="{Binding UpdatePatientCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Border x:Name="ButtonSubmit" Height="30" Width="100" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#E91E63" Offset="0.0"/>
+                                            <GradientStop Color="#880E4F" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Update" FontWeight="Bold" FontSize="12"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="DeleteButton" Margin="20 0 20 0" Command="{Binding DeletePatientCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Border x:Name="ButtonSubmit" Height="30" Width="100" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#E91E63" Offset="0.0"/>
+                                            <GradientStop Color="#880E4F" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Delete" FontWeight="Bold" FontSize="12"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
