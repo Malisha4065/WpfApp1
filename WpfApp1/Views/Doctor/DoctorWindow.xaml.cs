@@ -25,6 +25,7 @@ namespace WpfApp1.Views.Doctor
             /*DataContext = new DoctorWindowVM();
             InitializeComponent();*/
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             DoctorWindowVM doctorWindowVM = new DoctorWindowVM();
             DataContext = doctorWindowVM;
             if (doctorWindowVM.CloseAction == null)
@@ -47,6 +48,18 @@ namespace WpfApp1.Views.Doctor
         private void Close_Clicked(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Maximize_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+            }
         }
     }
 }
