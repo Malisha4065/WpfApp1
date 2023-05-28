@@ -82,7 +82,7 @@
                 <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="[Select an entry and click to update/delete entry]" FontSize="12"
-                   Foreground="#FAFAFA" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                   Foreground="#FAFAFA" VerticalAlignment="Center"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="UpdateButton" Margin="15 0 0 0" Command="{Binding UpdatePatientCommand}">
                     <Button.Template>

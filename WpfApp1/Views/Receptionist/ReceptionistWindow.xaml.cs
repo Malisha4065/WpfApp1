@@ -25,6 +25,7 @@ namespace WpfApp1.Views.Receptionist
             /*DataContext = new ReceptionistWindowVM();
             InitializeComponent();*/
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             ReceptionistWindowVM receptionistWindowVM = new ReceptionistWindowVM();
             DataContext = receptionistWindowVM;
             if (receptionistWindowVM.CloseAction == null)
@@ -45,6 +46,18 @@ namespace WpfApp1.Views.Receptionist
         private void Close_Clicked(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Maximize_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+            }
         }
     }
 }

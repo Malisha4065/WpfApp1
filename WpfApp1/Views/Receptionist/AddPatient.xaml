@@ -31,60 +31,93 @@
         <StackPanel Margin="105 0 105 30">
             <Label Content="Patient Name:"/>
             <TextBox Name="PatientNameTxtBox" Text="{Binding PatientName}"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Gender: "/>
-                <Label Content="Patient ID: " Margin="165 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Width="180" Name="GenderBox" FontSize="10" SelectedValue="{Binding Gender}" SelectedValuePath="Tag">
+            <Grid Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Gender: "/>
+                <Label Grid.Column="1" Content="Patient ID: " Margin="15 0 0 0"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="GenderBox" FontSize="10" SelectedValue="{Binding Gender}" SelectedValuePath="Tag"
+                          Margin="0 0 20 0">
                     <ComboBoxItem Tag="Male" Content="Male" IsSelected="True"/>
                     <ComboBoxItem Tag="Female" Content="Female"/>
                 </ComboBox>
-                <TextBox Name="PatientIDTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding PatientId}"/>
-            </StackPanel>
-            <Label Content="Disease: "/>
-            <TextBox Name="DiseaseTxtBox" Width="400" Text="{Binding Disease}"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Doctor: "/>
-                <Label Content="Payment(Rupees): " Margin="166 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="DoctorBox" Width="180" FontSize="10" ItemsSource="{Binding Doctors}"  SelectedItem="{Binding Doctor}"
-                          SelectedValue="{Binding Doctor.DoctorID}" SelectedValuePath="DoctorID" DisplayMemberPath="Name"/>
-                <TextBox Name="PaymentTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Payment}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="City: "/>
-                <Label Content="Phone Number: " Margin="180 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Name="CityTxtBox" Width="180" Text="{Binding City}"/>
-                <TextBox Name="PhoneNoBox" Width="190" Margin="30 0 0 0" Text="{Binding PhoneNumber}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Appointment Date: "/>
-                <Label Content="Appointment Time: " Margin="116 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <DatePicker Name="AppDatePicker" Width="180" IsTodayHighlighted="True" SelectedDate="{Binding Date, FallbackValue={x:Static sys:DateTime.Now}}">
+                <TextBox Grid.Column="1" Name="PatientIDTxtBox" Margin="15 0 0 0" Text="{Binding PatientId}"/>
+            </Grid>
+            <Label Margin="0 5 0 0" Content="Disease: "/>
+            <TextBox Name="DiseaseTxtBox" Text="{Binding Disease}"/>
+            <Grid Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Doctor: "/>
+                <Label Grid.Column="1" Content="Payment(Rupees): " Margin="15 0 0 0"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="DoctorBox" FontSize="10" ItemsSource="{Binding Doctors}"  SelectedItem="{Binding Doctor}"
+                          SelectedValue="{Binding Doctor.DoctorID}" SelectedValuePath="DoctorID" DisplayMemberPath="Name" Margin="0 0 20 0"/>
+                <TextBox Grid.Column="1" Name="PaymentTxtBox" Margin="15 0 0 0" Text="{Binding Payment}"/>
+            </Grid>
+            <Grid Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="City: "/>
+                <Label Grid.Column="1" Content="Phone Number: " Margin="15 0 0 0"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="CityTxtBox" Margin="0 0 20 0" Text="{Binding City}"/>
+                <TextBox Grid.Column="1" Name="PhoneNoBox" Margin="15 0 0 0" Text="{Binding PhoneNumber}"/>
+            </Grid>
+            <Grid Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Appointment Date: "/>
+                <Label Grid.Column="1" Content="Appointment Time: " Margin="15 0 0 0"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="0" Name="AppDatePicker" Margin="0 0 20 0" IsTodayHighlighted="True" SelectedDate="{Binding Date, FallbackValue={x:Static sys:DateTime.Now}}">
                     <DatePicker.BlackoutDates>
                         <CalendarDateRange Start="01/01/0001" End="12/31/2022"/>
                     </DatePicker.BlackoutDates>
                 </DatePicker>
-                <TextBox Name="AppTimeTxtBox" Width="190" Margin="30 0 0 0" Text="{Binding Time}"/>
-            </StackPanel>
+                <TextBox Grid.Column="1" Name="AppTimeTxtBox" Margin="15 0 0 0" Text="{Binding Time}"/>
+            </Grid>
             <Button Name="PatientSubmitButton" Margin="0 10 0 0" Command="{Binding InsertPatientCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid>
-                            <Border x:Name="ButtonSubmit" Height="20" Width="70" CornerRadius="10" BorderThickness="1.5" Background="#E91E63">
+                            <Border x:Name="ButtonSubmit" Height="30" Width="90" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
                                 <Border.BorderBrush>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                         <GradientStop Color="#E91E63" Offset="0.0"/>
                                         <GradientStop Color="#880E4F" Offset="1.0"/>
                                     </LinearGradientBrush>
                                 </Border.BorderBrush>
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Submit" FontWeight="Bold" FontSize="10"/>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Submit" FontWeight="Bold" FontSize="12"/>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
