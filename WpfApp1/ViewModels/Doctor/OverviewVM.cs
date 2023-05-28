@@ -28,12 +28,13 @@ namespace WpfApp1.ViewModels.Doctor
         public OverviewVM()
         {
             WeakReferenceMessenger.Default.Register<MessengerOverviewDoc>(this);
-            
         }
 
         private void Initializer()
         {
             TotalPatients = doctor.Patients.Count;
+            TotalPayment = doctor.Patients.Sum(patient => int.Parse(patient.Payment));
+            UpcomingAppointments = doctor.Patients.Count(appointment => DateTime.Parse(appointment.Date) >= DateTime.Today);
         }
 
         public void Receive(MessengerOverviewDoc message)
