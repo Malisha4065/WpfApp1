@@ -33,6 +33,7 @@
                 </Border.Background>
                 <StackPanel VerticalAlignment="Center">
                     <Label Content="Upcoming Appointments: " HorizontalAlignment="Center"/>
+                    <Label Content="{Binding UpcomingAppointments}" FontSize="20" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
 
@@ -77,7 +78,8 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <StackPanel VerticalAlignment="Center">
-                    <Label Content="Total Payment: " HorizontalAlignment="Center"/>
+                    <Label Content="Total Payment(Rs.): " HorizontalAlignment="Center"/>
+                    <Label Content="{Binding TotalPayment}" FontSize="20" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>

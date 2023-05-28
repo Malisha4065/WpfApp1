@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows.Automation.Peers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore;
 using WpfApp1.Database;
 using WpfApp1.Messenger;
 using WpfApp1.Models;
@@ -62,6 +64,9 @@ namespace WpfApp1.ViewModels.Doctor
                     patient.PhoneNumber = PhoneNumber;
 
                     db.SaveChanges();
+
+                    DoctorC tempdoctor = db.Doctors.Include(d => d.Patients).FirstOrDefault(d => d.DoctorID == doctor.DoctorID);
+                    WeakReferenceMessenger.Default.Send(new MessengerSendBackUpdatedDoctor(tempdoctor));
                 }
 
                 doctor = null;
