@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views.Receptionist"
         xmlns:viewModelReceptionist="clr-namespace:WpfApp1.ViewModels.Receptionist"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -33,8 +34,7 @@
                             <GradientStop Color="#E91E63" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                    <TextBlock Text="{TemplateBinding Property=Content}" HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" Foreground="#FAFAFA" FontSize="17" FontWeight="DemiBold" Margin="3 2 3 5"/>
+                    <iconPacks:PackIconMaterial Kind="{TemplateBinding Property=Tag}" Foreground="#FAFAFA" VerticalAlignment="Center" HorizontalAlignment="Center" Width="10"/>
                 </Border>
             </Grid>
             <ControlTemplate.Triggers>
@@ -59,7 +59,10 @@
                             <GradientStop Color="#880E4F" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.BorderBrush>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="{TemplateBinding Property=Content}" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="{TemplateBinding Property=Tag}" Foreground="#FAFAFA"/>
+                        <TextBlock Margin="10 0 0 0" Foreground="#FAFAFA" Text="{TemplateBinding Property=Content}" FontWeight="Bold"/>
+                    </StackPanel>
                 </Border>
             </Grid>
             <ControlTemplate.Triggers>
@@ -95,9 +98,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
-                <Button Grid.Column="1" Content="-" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
-                <Button Content="o" Template="{StaticResource UpperButtons}" Click="Maximize_Clicked" Margin="0 0 10 0"/>
-                <Button Grid.Column="2" Content="x" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="0 0 20 0"/>
+                <Button Tag="{x:Static iconPacks:PackIconMaterialKind.WindowMinimize}" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
+                <Button Tag="{x:Static iconPacks:PackIconMaterialKind.WindowMaximize}" Template="{StaticResource UpperButtons}" Click="Maximize_Clicked" Margin="0 0 10 0"/>
+                <Button Tag="{x:Static iconPacks:PackIconMaterialKind.CloseThick}" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="0 0 20 0"/>
             </StackPanel>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -105,13 +108,18 @@
                     <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
-                    <RadioButton Content="View Patients" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllPatientsFormCommand}"/>
-                    <RadioButton Content="Add a Patient" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddPatientFormCommand}"/>
-                    <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
-                    <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
+                    <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.BookmarkMultiple}"/>
+                    <RadioButton Content="View Patients" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllPatientsFormCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.Stethoscope}"/>
+                    <RadioButton Content="Add a Patient" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddPatientFormCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.Human}"/>
+                    <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.BellRing}"/>
+                    <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.Cash}"/>
                 </StackPanel>
-                <Button Grid.Row="1" Content="LOG OUT" Template="{StaticResource ButtonT}" Command="{Binding LogOutCommand}"/>
+                <Button Grid.Row="1" Tag="{x:Static iconPacks:PackIconMaterialKind.Logout}" Content="LOG OUT" Template="{StaticResource ButtonT}" Command="{Binding LogOutCommand}"/>
             </Grid>
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"/>
         </Grid>
