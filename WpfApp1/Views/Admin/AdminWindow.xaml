@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views.Admin"
         xmlns:viewModel="clr-namespace:WpfApp1.ViewModels.Admin"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -33,8 +34,7 @@
                             <GradientStop Color="#E91E63" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                    <TextBlock Text="{TemplateBinding Property=Content}" HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" Foreground="#FAFAFA" FontSize="17" FontWeight="DemiBold" Margin="3 2 3 5"/>
+                    <iconPacks:PackIconMaterial Kind="{TemplateBinding Property=Tag}" Foreground="#FAFAFA" VerticalAlignment="Center" HorizontalAlignment="Center" Width="10"/>
                 </Border>
             </Grid>
             <ControlTemplate.Triggers>
@@ -59,7 +59,10 @@
                             <GradientStop Color="#880E4F" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.BorderBrush>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="{TemplateBinding Property=Content}" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="{TemplateBinding Property=Tag}" Foreground="#FAFAFA"/>
+                        <TextBlock Margin="10 0 0 0" Foreground="#FAFAFA" Text="{TemplateBinding Property=Content}" FontWeight="Bold"/>
+                    </StackPanel>
                 </Border>
             </Grid>
             <ControlTemplate.Triggers>
@@ -100,9 +103,9 @@
                     <ColumnDefinition Width="0.4*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="-" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
-                    <Button Content="o" Template="{StaticResource UpperButtons}" Click="Maximize_Clicked" Margin="0 0 10 0"/>
-                    <Button Content="x" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="0 0 20 0"/>
+                    <Button Tag="{x:Static iconPacks:PackIconMaterialKind.WindowMinimize}" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked" Margin="0 0 10 0"/>
+                    <Button Tag="{x:Static iconPacks:PackIconMaterialKind.WindowMaximize}" Template="{StaticResource UpperButtons}" Click="Maximize_Clicked" Margin="0 0 10 0"/>
+                    <Button Tag="{x:Static iconPacks:PackIconMaterialKind.CloseThick}" Template="{StaticResource UpperButtons}" Click="Close_Clicked" Margin="0 0 20 0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
@@ -111,16 +114,23 @@
                     <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"/>
-                    <RadioButton Content="Add User" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddUserFormCommand}"/>
-                    <RadioButton Content="View Users" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllUsersCommand}"/>
-                    <RadioButton Content="Add Doctor" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddDoctorFormCommand}"/>
-                    <RadioButton Content="View Doctors" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllDoctorsCommand}"/>
-                    <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"/>
-                    <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"/>
+                    <RadioButton Content="Appointments" FontSize="22" IsChecked="True" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.BookmarkMultiple}"/>
+                    <RadioButton Content="Add User" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddUserFormCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.AccountPlus}"/>
+                    <RadioButton Content="View Users" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllUsersCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.AccountEye}"/>
+                    <RadioButton Content="Add Doctor" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding AddDoctorFormCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.Doctor}"/>
+                    <RadioButton Content="View Doctors" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAllDoctorsCommand}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.AccountEyeOutline}"/>
+                    <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.BellRing}"/>
+                    <RadioButton Content="Payments" FontSize="22" Style="{StaticResource SideBar}"
+                                 Tag="{x:Static iconPacks:PackIconMaterialKind.Cash}"/>
 
                 </StackPanel>
-                <Button Grid.Row="1" Content="LOG OUT" Template="{StaticResource ButtonT}" Command="{Binding LogOutCommand}"/>
+                <Button Grid.Row="1" Tag="{x:Static iconPacks:PackIconMaterialKind.Logout}" Content="LOG OUT" Template="{StaticResource ButtonT}" Command="{Binding LogOutCommand}"/>
             </Grid>
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"/>
         </Grid>
