@@ -51,6 +51,10 @@
             <DataTemplate DataType="{x:Type viewModelDoctor:AddPatientForDoctorVM}">
                 <viewDoctor:AddPatientForDoctor/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelDoctor:AddReportVM}">
+                <viewDoctor:AddReport/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

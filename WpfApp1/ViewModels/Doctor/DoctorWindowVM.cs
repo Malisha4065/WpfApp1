@@ -16,6 +16,7 @@ namespace WpfApp1.ViewModels.Doctor
         public ViewPatientsVM viewPatientsVM { get; set; }
         public OverviewVM overviewVM { get; set; }
         public AddPatientForDoctorVM addPatientForDoctorVM { get; set; }
+        public AddReportVM addReportVM { get; set; }
 
         private readonly WindowFactory windowFactory;
         public Action CloseAction { get; set; }
@@ -129,6 +130,14 @@ namespace WpfApp1.ViewModels.Doctor
         public void Receive(MessengerSendBackUpdatedDoctor message)
         {
             Doctor = message.Value;
+        }
+
+
+        [RelayCommand]
+        public void ViewAddReport()
+        {
+            addReportVM = new AddReportVM();
+            CurrentView = addReportVM;
         }
     }
 }

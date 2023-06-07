@@ -122,7 +122,7 @@
                                  Tag="{x:Static iconPacks:PackIconMaterialKind.Stethoscope}"/>
                     <RadioButton Content="Edit Patient" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAddPatientCommand}"
                                  Tag="{x:Static iconPacks:PackIconMaterialKind.HumanEdit}"/>
-                    <RadioButton Content="Add a Report" FontSize="22" Style="{StaticResource SideBar}"
+                    <RadioButton Content="Add a Report" FontSize="22" Style="{StaticResource SideBar}" Command="{Binding ViewAddReportCommand}" 
                                  Tag="{x:Static iconPacks:PackIconMaterialKind.BookEdit}"/>
                     <RadioButton Content="Notifications" FontSize="22" Style="{StaticResource SideBar}"
                                  Tag="{x:Static iconPacks:PackIconMaterialKind.BellRing}"/>
