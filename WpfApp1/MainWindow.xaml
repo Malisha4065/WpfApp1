@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -53,8 +54,7 @@
                             <GradientStop Color="#E91E63" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                    <TextBlock Text="{TemplateBinding Property=Content}" HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" Foreground="#FAFAFA" FontSize="17" FontWeight="DemiBold" Margin="3 2 3 5"/>
+                    <iconPacks:PackIconMaterial Kind="{TemplateBinding Property=Tag}" Foreground="#FAFAFA" VerticalAlignment="Center" HorizontalAlignment="Center" Width="10"/>
                 </Border>
             </Grid>
             <ControlTemplate.Triggers>
@@ -98,8 +98,8 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="-" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked"/>
-                    <Button Grid.Column="2" Content="x" Template="{StaticResource UpperButtons}" HorizontalAlignment="Left" Click="Close_Clicked"/>
+                    <Button Grid.Column="1" Tag="{x:Static iconPacks:PackIconMaterialKind.WindowMinimize}" Template="{StaticResource UpperButtons}" Click="Minimize_Clicked"/>
+                    <Button Grid.Column="2" Tag="{x:Static iconPacks:PackIconMaterialKind.CloseThick}" Template="{StaticResource UpperButtons}" HorizontalAlignment="Left" Click="Close_Clicked"/>
                 </Grid>
                 <StackPanel DockPanel.Dock="Bottom" Margin="120 0 120 0">
                     <StackPanel Orientation="Horizontal">
