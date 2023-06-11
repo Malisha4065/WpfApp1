@@ -26,48 +26,211 @@
             <Setter Property="Foreground" Value="#FAFAFA"/>
         </Style>
     </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Patient Name: " VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Patient Name: " VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" SelectedItem="{Binding PatientName}"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Chief Complaint: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding ChiefComplaint}"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Date of Birth: " VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding DateOfBirth}"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Date: " VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Date}"/>
+                </Grid>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Chief Complaint: " VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1"/>
+                <StackPanel Grid.Column="0">
+                    <Label Content="Does this issue require surgery?"/>
+                    <CheckBox Content="Yes" Foreground="#FAFAFA" IsChecked="{Binding IsSurgeryRequired}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="If Yes, Date of Surgery: "/>
+                    <DatePicker SelectedDate="{Binding DateOfSurgery}"/>
+                </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Label Content="Medical History" FontSize="14"/>
+            <Label Content="Do you have a history of the following problems?"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <CheckBox Content="Asthma" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[0]}"/>
+                    <CheckBox Content="Diabetes" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[1]}"/>
+                    <CheckBox Content="Heart Problems" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[2]}"/>
+                    <CheckBox Content="Cancer" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[3]}"/>
+                    <CheckBox Content="Stroke" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[4]}"/>
+                    <CheckBox Content="Bone/Joint Problems" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[5]}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <CheckBox Content="Kidney Problems" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[6]}"/>
+                    <CheckBox Content="Gallbladder" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[7]}"/>
+                    <CheckBox Content="Liver Problems" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[8]}"/>
+                    <CheckBox Content="Electrical Implants" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[9]}"/>
+                    <CheckBox Content="Anxiety Attacks" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[10]}"/>
+                    <CheckBox Content="Sleep Apnea" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[11]}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <CheckBox Content="Depression" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[12]}"/>
+                    <CheckBox Content="Bowel Problems" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[13]}"/>
+                    <CheckBox Content="Alcohol Abuse" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[14]}"/>
+                    <CheckBox Content="Drug Use" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[15]}"/>
+                    <CheckBox Content="Smoking" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[16]}"/>
+                    <CheckBox Content="Headaches" Foreground="#FAFAFA" IsChecked="{Binding MedicalHistory[17]}"/>
+                </StackPanel>
+            </Grid>
+            <Label Content="Past Surgeries: "/>
+            <CheckBox Content="No Surgeries" Foreground="#FAFAFA" IsChecked="{Binding AnyPastSurgeries}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Content="1" HorizontalAlignment="Center"/>
+                <Label Grid.Row="2" Content="2" HorizontalAlignment="Center"/>
+                <Label Grid.Row="3" Content="3" HorizontalAlignment="Center"/>
+
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <Label Content="Hospital"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="2" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <Label Content="Year"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="3" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <Label Content="Complications"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Hospitals[0]}"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Years[0]}"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="3" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Complications[0]}"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Hospitals[1]}"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="2" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Years[1]}"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="3" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Complications[1]}"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="1" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Hospitals[2]}"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="2" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Years[2]}"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="3" BorderBrush="#FAFAFA" BorderThickness="1">
+                    <TextBox BorderThickness="0 0 0 0" Text="{Binding Complications[2]}"/>
+                </Border>
+            </Grid>
+
+            <Grid Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Date of Birth: " VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Diagnosis"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="Medications"/>
+
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="#FAFAFA" BorderThickness="1" Height="86" CornerRadius="5" Margin="5">
+                    <TextBox Margin="5" AcceptsReturn="True" 
+                         TextWrapping="Wrap" Height="Auto" BorderThickness="0 0 0 0"
+                         VerticalScrollBarVisibility="Auto" Text="{Binding Diagnosis}"/>
+                </Border>
+                
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <CheckBox Content="No medications" Foreground="#FAFAFA" IsChecked="{Binding AnyMedications}"/>
+                    <Border  BorderBrush="#FAFAFA" BorderThickness="1" Height="70" CornerRadius="5" Margin="5">
+                        <TextBox Margin="5" AcceptsReturn="True" TextWrapping="Wrap" Height="Auto"
+                             BorderThickness="0 0 0 0" VerticalScrollBarVisibility="Auto" Text="{Binding Medications}"/>
+                    </Border>
+                </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Date: " VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1"/>
-            </Grid>
-        </Grid>
-    </StackPanel>
+
+            <Label Content="Additional Notes"/>
+            <Border BorderBrush="#FAFAFA" BorderThickness="1" Height="86" CornerRadius="5" Margin="5">
+                <TextBox Margin="5" AcceptsReturn="True" 
+                         TextWrapping="Wrap" Height="Auto" BorderThickness="0 0 0 0"
+                         VerticalScrollBarVisibility="Auto" Text="{Binding AdditionalNotes}"/>
+            </Border>
+
+            <Button Name="ReportSubmitButton" Margin="0 10 0 0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Border x:Name="ButtonSubmit" Height="30" Width="80" CornerRadius="15" BorderThickness="1.5" Background="#E91E63">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#E91E63" Offset="0.0"/>
+                                        <GradientStop Color="#880E4F" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FAFAFA" Text="Submit" FontWeight="Bold" FontSize="10"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonSubmit" Property="Background" Value="#880E4F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

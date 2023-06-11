@@ -29,6 +29,8 @@ namespace WpfApp1.Models
         public string Payment { get; set;}
         [Required]
         public string PhoneNumber { get; set;}
+
+        public virtual DoctorReport DoctorReport { get; set;}
         
     }
 }

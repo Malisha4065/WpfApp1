@@ -39,4 +39,10 @@
     <Resource Include="Icons\username.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DB\Users.db">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
