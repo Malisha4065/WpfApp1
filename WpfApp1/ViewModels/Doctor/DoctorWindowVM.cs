@@ -134,10 +134,26 @@ namespace WpfApp1.ViewModels.Doctor
 
 
         [RelayCommand]
-        public void ViewAddReport()
+        public async void ViewAddReport()
         {
+            Task userControlTask = userControlAddReport();
+            Task messageTask = sendMessageAddReport();
+
+            await userControlTask;
+            await messageTask;
+        }
+
+        private async Task userControlAddReport()
+        {
+            await Task.Delay(100);
             addReportVM = new AddReportVM();
             CurrentView = addReportVM;
+        }
+
+        private async Task sendMessageAddReport()
+        {
+            await Task.Delay(150);
+            WeakReferenceMessenger.Default.Send(new MessengerDoctorReportDoc(Doctor));
         }
     }
 }
