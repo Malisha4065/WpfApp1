@@ -23,14 +23,14 @@ namespace WpfApp1.ViewModels.Doctor
         [ObservableProperty]
         public int totalPayment;
 
-        private DoctorC doctor;
+        public DoctorC doctor;
 
         public OverviewVM()
         {
             WeakReferenceMessenger.Default.Register<MessengerOverviewDoc>(this);
         }
 
-        private void Initializer()
+        public void Initializer()
         {
             TotalPatients = doctor.Patients.Count;
             TotalPayment = doctor.Patients.Sum(patient => int.Parse(patient.Payment));
