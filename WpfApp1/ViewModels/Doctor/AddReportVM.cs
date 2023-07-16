@@ -101,7 +101,7 @@ namespace WpfApp1.ViewModels.Doctor
                     };
 
                     string medicalString = JsonSerializer.Serialize(MedicalHistory);
-                    doctorReport.MedicalString = medicalString; ;
+                    doctorReport.MedicalString = medicalString; 
                     string hospitalsString = JsonSerializer.Serialize(Hospitals);
                     doctorReport.Hospitals = hospitalsString;
                     string yearsString = JsonSerializer.Serialize(Years);
