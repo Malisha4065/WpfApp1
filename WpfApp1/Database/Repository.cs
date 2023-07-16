@@ -28,6 +28,7 @@ namespace WpfApp1.Database
             modelBuilder.Entity<DoctorC>().ToTable("DoctorTable");
             modelBuilder.Entity<Patient>().ToTable("PatientTable");
             modelBuilder.Entity<DoctorReport>().ToTable("ReportTable");
+            modelBuilder.Entity<DoctorReport>().HasKey(x=> new { x.Id, x.DoctorId });
         }
 
     }

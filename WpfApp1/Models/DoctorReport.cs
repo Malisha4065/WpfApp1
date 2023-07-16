@@ -14,6 +14,9 @@ namespace WpfApp1.Models
         [Key]
         [ForeignKey("Patient")]
         public int Id { get; set; }
+        [Key]
+        [ForeignKey("Doctor")]
+        public int DoctorId { get; set; }
         [Required]
         public string PatientName { get; set; }
         [Required]
