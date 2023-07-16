@@ -14,6 +14,9 @@ namespace WpfApp1.Models
         [Key]
         [ForeignKey("Patient")]
         public int Id { get; set; }
+        [Key]
+        [ForeignKey("Doctor")]
+        public int DoctorId { get; set; }
         [Required]
         public string PatientName { get; set; }
         [Required]
@@ -40,7 +43,7 @@ namespace WpfApp1.Models
         public string AdditionalNotes { get; set; } 
         
         public virtual Patient Patient { get; set; }
-
+        public virtual DoctorC Doctor {  get; set; }
     }
 
 }

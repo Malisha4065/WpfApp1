@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using WpfApp1.Database;
+using WpfApp1.Messenger;
 using WpfApp1.Models;
 
 namespace WpfApp1.ViewModels.Doctor
 {
-    public partial class AddReportVM : ObservableObject
+    public partial class AddReportVM : ObservableObject, IRecipient<MessengerDoctorReportDoc>
     {
         [ObservableProperty]
         public string patientName;
@@ -28,15 +31,15 @@ namespace WpfApp1.ViewModels.Doctor
         [ObservableProperty]
         public DateTime dateOfSurgery;
         [ObservableProperty]
-        public ObservableCollection<bool> medicalHistory;
+        public List<bool> medicalHistory;
         [ObservableProperty]
         public bool anyPastSurgeries;
         [ObservableProperty]
-        public ObservableCollection<string> hospitals;
+        public List<string> hospitals;
         [ObservableProperty]
-        public ObservableCollection<string> years;
+        public List<string> years;
         [ObservableProperty]
-        public ObservableCollection<string> complications;
+        public List<string> complications;
         [ObservableProperty]
         public string diagnosis;
         [ObservableProperty]
@@ -45,6 +48,33 @@ namespace WpfApp1.ViewModels.Doctor
         public string medications;
         [ObservableProperty]
         public string additionalNotes;
+
+        [ObservableProperty]
+        public ObservableCollection<Patient> patients;
+        [ObservableProperty]
+        public Patient selectedPatient;
+    
+        public DoctorC doctor;
+
+        public AddReportVM()
+        {
+            WeakReferenceMessenger.Default.Register<MessengerDoctorReportDoc>(this);
+            MedicalHistory = new List<bool>(new bool[18]);
+            Hospitals = new List<string>(new string[3]);
+            Years = new List<string>(new string[3]);
+            Complications = new List<string>(new string[3]);
+
+            //PatientList();
+        }
+
+        /*private void PatientList() 
+        {
+            using (var db = new Repository())
+            {
+                var list = db.Doctors.Find(doctor.DoctorID).Patients.OrderBy(p => p.PatientName).ToList();
+                Patients = new ObservableCollection<Patient>(list);
+            }
+        }*/
 
         [RelayCommand]
         public void ReportSubmit()
@@ -55,6 +85,8 @@ namespace WpfApp1.ViewModels.Doctor
                 {
                     DoctorReport doctorReport = new DoctorReport()
                     {
+                        Id = SelectedPatient.PatientId,
+                        DoctorId = doctor.DoctorID,
                         PatientName = PatientName,
                         ChiefComplaint = ChiefComplaint,
                         DateOfBirth = DateOfBirth.Date.ToString("d"),
@@ -69,7 +101,7 @@ namespace WpfApp1.ViewModels.Doctor
                     };
 
                     string medicalString = JsonSerializer.Serialize(MedicalHistory);
-                    doctorReport.MedicalString = medicalString;
+                    doctorReport.MedicalString = medicalString; ;
                     string hospitalsString = JsonSerializer.Serialize(Hospitals);
                     doctorReport.Hospitals = hospitalsString;
                     string yearsString = JsonSerializer.Serialize(Years);
@@ -77,6 +109,7 @@ namespace WpfApp1.ViewModels.Doctor
                     string complicationsString = JsonSerializer.Serialize(Complications);
                     doctorReport.Complications = complicationsString;
 
+                    db.DoctorReports.Add(doctorReport);
                     db.SaveChanges();
                 }
             }
@@ -84,6 +117,12 @@ namespace WpfApp1.ViewModels.Doctor
             {
                 MessageBox.Show(ex.Message, "Error!");
             }
+        }
+
+        public void Receive(MessengerDoctorReportDoc message)
+        {
+            doctor = message.Value;
+            Patients = new ObservableCollection<Patient>(doctor.Patients.ToList());
         }
     }
 }

@@ -57,4 +57,9 @@ namespace WpfApp1.Messenger
     {
         public MessengerSendBackUpdatedDoctor(DoctorC value) : base(value) { }
     }
+
+    public class MessengerDoctorReportDoc : ValueChangedMessage<DoctorC>
+    {
+        public MessengerDoctorReportDoc(DoctorC value) : base(value) { }
+    }
 }

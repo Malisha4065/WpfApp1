@@ -43,7 +43,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Patient Name: " VerticalAlignment="Center"/>
-                    <ComboBox Grid.Column="1" SelectedItem="{Binding PatientName}"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" SelectedValue="{Binding PatientName}"
+                              SelectedValuePath="PatientName" DisplayMemberPath="PatientName"/>
                 </Grid>
                 <Grid Grid.Row="0" Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -208,7 +209,7 @@
                          VerticalScrollBarVisibility="Auto" Text="{Binding AdditionalNotes}"/>
             </Border>
 
-            <Button Name="ReportSubmitButton" Margin="0 10 0 0">
+            <Button Name="ReportSubmitButton" Margin="0 10 0 0" Command="{Binding ReportSubmitCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid>
